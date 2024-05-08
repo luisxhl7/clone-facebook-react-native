@@ -1,10 +1,19 @@
 import React from 'react'
-import { Text } from 'react-native'
+import Thoughts from '../components/molecules/thoughts/Thoughts'
+import { ScrollView, StyleSheet, View } from 'react-native'
 
-const HomeScreen = () => {
+export default HomeScreen = () => {
     return (
-        <Text>Home</Text>
+        <View style={styles.home}>
+            <ScrollView>
+                <Thoughts/>
+            </ScrollView>
+        </View>
     )
 }
-
-export default HomeScreen
+const styles = StyleSheet.create({
+    home:{
+        minHeight: 1700,
+        backgroundColor: '#f0f2f5'
+    }
+})
