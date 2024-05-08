@@ -1,18 +1,30 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Constants from 'expo-constants'
+import TabsTopNavigator from './src/navigate/TabsTopNavigator';
 
 export default function App() {
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="light" />
+      <NavigationContainer>
+        <View style={styles.header} >
+          <Text>facebook</Text>
+        </View>
+        <TabsTopNavigator/>
+      </NavigationContainer>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#0866ff',
+    paddingTop: Constants.statusBarHeight
+  },
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
