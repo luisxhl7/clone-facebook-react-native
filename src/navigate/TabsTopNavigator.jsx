@@ -8,17 +8,17 @@ import NotificationScreen from '../screens/NotificationScreen';
 import MenuScreen from '../screens/MenuScreen';
 import FriendsScreen from '../screens/FriendsScreen';
 
-const Tab = createMaterialTopTabNavigator();
+const FirstTab  = createMaterialTopTabNavigator();
 
 const TabsTopNavigator = () => {
     return (
-      <Tab.Navigator 
+      <FirstTab.Navigator 
         initialRouteName='home'
         screenOptions={{
           tabBarActiveTintColor:'#0866ff'
         }}
       >
-        <Tab.Screen name="home" component={HomeScreen} 
+        <FirstTab.Screen name="home" component={HomeScreen} 
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({focused, color}) => (
@@ -26,7 +26,7 @@ const TabsTopNavigator = () => {
             )
           }}
         />
-        <Tab.Screen name="reels" component={ReelsScreen} 
+        <FirstTab.Screen name="reels" component={ReelsScreen} 
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({focused ,color}) => (
@@ -34,7 +34,7 @@ const TabsTopNavigator = () => {
             )
           }}
         />
-        <Tab.Screen name="friends" component={FriendsScreen} 
+        <FirstTab.Screen name="friends" component={FriendsScreen} 
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({focused ,color}) => (
@@ -42,7 +42,7 @@ const TabsTopNavigator = () => {
             )
           }}
         />
-        <Tab.Screen name="marketPlace" component={MarketPlace} 
+        <FirstTab.Screen name="marketPlace" component={MarketPlace} 
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({focused ,color}) => (
@@ -50,7 +50,7 @@ const TabsTopNavigator = () => {
             )
           }}
         />
-        <Tab.Screen name="notification" component={NotificationScreen} 
+        <FirstTab.Screen name="notification" component={NotificationScreen} 
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({focused ,color}) => (
@@ -58,7 +58,7 @@ const TabsTopNavigator = () => {
             ),
           }}
         />
-        <Tab.Screen name="menu" component={MenuScreen} 
+        <FirstTab.Screen name="menu" component={MenuScreen} 
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({focused ,color}) => (
@@ -66,7 +66,7 @@ const TabsTopNavigator = () => {
             )
           }}
         />
-      </Tab.Navigator>
+      </FirstTab.Navigator>
     );
 }
 

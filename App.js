@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import TabsTopNavigator from './src/navigate/TabsTopNavigator';
-import Header from './src/components/molecules/header/Header';
+import Header from './src/components/organisms/header/Header';
 
 export default function App() {
   

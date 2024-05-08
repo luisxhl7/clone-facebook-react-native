@@ -5,7 +5,6 @@ import NotificationScreen from '../screens/NotificationScreen';
 
 const Stack = createNativeStackNavigator();
 
-
 const NavigateConfig = () => {
     return (
         <Stack.Navigator>

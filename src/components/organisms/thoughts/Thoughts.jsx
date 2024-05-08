@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     contentThoughts: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10,
-        backgroundColor: '#ffffff'
+        padding: 8,
+        backgroundColor: '#ffffff',
+        marginBottom: 5
     },
     image:{
         width: 40, 
