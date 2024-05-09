@@ -1,17 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import TabsTopNavigator from './src/navigate/TabsTopNavigator';
-import Header from './src/components/organisms/header/Header';
+import PageLayout from './src/components/templates/pageLayout/PageLayout';
 
 export default function App() {
-  
   return (
-    <>
+    <NavigationContainer>
       <StatusBar style="auto" />
-      <NavigationContainer>
-        <Header/>
+      <PageLayout>
         <TabsTopNavigator/>
-      </NavigationContainer>
-    </>
+      </PageLayout>
+    </NavigationContainer>
   );
 }

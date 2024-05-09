@@ -21,7 +21,6 @@ export default Header = () => {
 const styles = StyleSheet.create({
     header: {
         height: 75,
-        // backgroundColor: '#0866ff',
         paddingTop: Constants.statusBarHeight,
         flexDirection: 'row',
         justifyContent: 'space-between',
