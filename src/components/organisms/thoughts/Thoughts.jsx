@@ -1,13 +1,14 @@
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
+import { imageProfile } from '../../../../assets/images/users';
 
 export default Thoughts = () => {
     return (
         <View style={styles.contentThoughts}>
             <Image
-                source={require('../../../../assets/perfil-1.png')}
-                style={styles.image}
+            source={imageProfile.profile_1}
+            style={styles.image}
             />
             <TouchableHighlight style={styles.buttonThoughts}>
                 <Text style={styles.buttonText}>¿Qué estás pensando?</Text>

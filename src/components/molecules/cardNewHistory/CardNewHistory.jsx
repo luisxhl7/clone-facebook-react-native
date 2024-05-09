@@ -1,13 +1,14 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
+import { imageProfile } from '../../../../assets/images/users';
 
 export default CardNewHistory = () => {
   return (
     <View style={styles.cardNewHistory}>
       <Image
         style={styles.newHistory}
-        source={require('../../../../assets/perfil-1.png')}
+        source={imageProfile.profile_1}
       />
       <AntDesign name="pluscircle" size={28} color="black" style={styles.circlePlus}/>
       <Text style={styles.textNewHistory}>Crear historia</Text>
@@ -26,7 +27,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignItems: 'center',
     backgroundColor: '#f7f8fa',
-    borderWidth: .5
+    borderWidth: .5,
+    borderColor: '#aeb3bd'
   },
   newHistory:{
     height: 140,

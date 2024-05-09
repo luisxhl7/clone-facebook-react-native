@@ -11,63 +11,63 @@ import FriendsScreen from '../screens/FriendsScreen';
 const FirstTab  = createMaterialTopTabNavigator();
 
 const TabsTopNavigator = () => {
-    return (
-      <FirstTab.Navigator 
-        initialRouteName='home'
-        screenOptions={{
-          tabBarActiveTintColor:'#0866ff'
+  return (
+    <FirstTab.Navigator 
+      initialRouteName='home'
+      screenOptions={{
+        tabBarActiveTintColor:'#0866ff'
+      }}
+    >
+      <FirstTab.Screen name="home" component={HomeScreen} 
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused, color}) => (
+            <Feather name="home" size={24} color={focused ? color : "#65676b"} />
+          )
         }}
-      >
-        <FirstTab.Screen name="home" component={HomeScreen} 
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: ({focused, color}) => (
-              <Feather name="home" size={24} color={focused ? color : "#65676b"} />
-            )
-          }}
-        />
-        <FirstTab.Screen name="reels" component={ReelsScreen} 
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: ({focused ,color}) => (
-              <MaterialCommunityIcons name="television-play" size={24} color={focused ? color : "#65676b"} />
-            )
-          }}
-        />
-        <FirstTab.Screen name="friends" component={FriendsScreen} 
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: ({focused ,color}) => (
-              <Feather name="users" size={24} color={focused ? color : "#65676b"} />
-            )
-          }}
-        />
-        <FirstTab.Screen name="marketPlace" component={MarketPlace} 
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: ({focused ,color}) => (
-              <MaterialCommunityIcons name="storefront-outline" size={24} color={focused ? color : "#65676b"} />
-            )
-          }}
-        />
-        <FirstTab.Screen name="notification" component={NotificationScreen} 
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: ({focused ,color}) => (
-              <Ionicons name="notifications-outline" size={24} color={focused ? color : "#65676b"} />
-            ),
-          }}
-        />
-        <FirstTab.Screen name="menu" component={MenuScreen} 
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: ({focused ,color}) => (
-              <SimpleLineIcons name="menu" size={24} color={focused ? color : "#65676b"} />
-            )
-          }}
-        />
-      </FirstTab.Navigator>
-    );
+      />
+      <FirstTab.Screen name="reels" component={ReelsScreen} 
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused ,color}) => (
+            <MaterialCommunityIcons name="television-play" size={24} color={focused ? color : "#65676b"} />
+          )
+        }}
+      />
+      <FirstTab.Screen name="friends" component={FriendsScreen} 
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused ,color}) => (
+            <Feather name="users" size={24} color={focused ? color : "#65676b"} />
+          )
+        }}
+      />
+      <FirstTab.Screen name="marketPlace" component={MarketPlace} 
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused ,color}) => (
+            <MaterialCommunityIcons name="storefront-outline" size={24} color={focused ? color : "#65676b"} />
+          )
+        }}
+      />
+      <FirstTab.Screen name="notification" component={NotificationScreen} 
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused ,color}) => (
+            <Ionicons name="notifications-outline" size={24} color={focused ? color : "#65676b"} />
+          ),
+        }}
+      />
+      <FirstTab.Screen name="menu" component={MenuScreen} 
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused ,color}) => (
+            <SimpleLineIcons name="menu" size={24} color={focused ? color : "#65676b"} />
+          )
+        }}
+      />
+    </FirstTab.Navigator>
+  );
 }
 
 export default TabsTopNavigator

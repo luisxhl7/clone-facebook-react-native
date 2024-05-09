@@ -1,16 +1,17 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
+import { imageProfile } from '../../../../assets/images/users'
 
 export default CardHistory = () => {
   return (
     <View style={styles.cardHistory}>
       <Image
         style={styles.imageUser}
-        source={require('../../../../assets/perfil-1.png')}
+        source={imageProfile.profile_1}
       />
       <Image
         style={styles.history}
-        source={require('../../../../assets/perfil-1.png')}
+        source={imageProfile.profile_1}
       />
       <Text style={styles.text}>Juan</Text>
     </View>

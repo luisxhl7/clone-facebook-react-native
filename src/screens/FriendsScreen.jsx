@@ -4,6 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import CardFriend from '../components/molecules/cardFriend/CardFriend';
 import { usuariosFacebook } from '../data/dataUsers';
 
+const user = usuariosFacebook[0]
 
 export default FriendsScreen = () => {
   return (
@@ -30,9 +31,11 @@ export default FriendsScreen = () => {
         </TouchableHighlight>
       </View>
       <View>
-        {usuariosFacebook.map( item => (
-          <CardFriend key={item.id} {...item}/>
-        ))}
+        {usuariosFacebook.map( item =>
+          user.id !== item.id && (
+            <CardFriend key={item.id} {...item}/>
+          )
+        )}
       </View>
     </ScrollView>
   )

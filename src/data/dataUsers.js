@@ -1,112 +1,256 @@
+import { imagePublications } from "../../assets/images/publications";
+import { imageProfile } from "../../assets/images/users";
+
 export const usuariosFacebook = [
   {
     id: '1234567890',
     name: 'Luis Carlos',
     lasName: 'Hernandez Lopez',
     email: 'usuario1@correo.com',
-    profilePicture: '../../assets/perfil-1.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '01/01/1990',
     gender: 'masculino',
     location: 'Colombia, Medellin',
-    friendsInCommon: 14
+    friendsList: [
+      {
+        id: '2345678901',
+        name: 'María Fernanda'
+      },
+      {
+        id: '3456789012',
+        name: 'Juan Pablo'
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María'
+      },
+      {
+        id: '5678901234',
+        name: 'Pedro José'
+      }
+    ],
+    publications: []
   },
   {
     id: '2345678901',
     name: 'María Fernanda',
     lasName: 'González Pérez',
     email: 'usuario2@correo.com',
-    profilePicture: '../../assets/perfil-2.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '02/02/1991',
     gender: 'femenino',
     location: 'México, Ciudad de México',
-    friendsInCommon: 7
+    friendsList: [
+      {
+        id: '5678901234',
+        name: 'Pedro José'
+      }
+    ],
+    publications: []
   },
   {
     id: '3456789012',
     name: 'Juan Pablo',
     lasName: 'Rodríguez García',
     email: 'usuario3@correo.com',
-    profilePicture: '../../assets/perfil-3.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '03/03/1992',
     gender: 'masculino',
     location: 'España, Madrid',
-    friendsInCommon: 3
+    friendsList: [
+      {
+        id: '2345678901',
+        name: 'María Fernanda'
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María'
+      },
+      {
+        id: '5678901234',
+        name: 'Pedro José'
+      }
+    ],
+    publications: []
   },
   {
     id: '4567890123',
     name: 'Ana María',
     lasName: 'Martínez González',
     email: 'usuario4@correo.com',
-    profilePicture: '../../assets/perfil-4.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '04/04/1993',
     gender: 'femenino',
     location: 'Argentina, Buenos Aires',
-    friendsInCommon: 2
+    friendsList: [
+      {
+        id: '2345678901',
+        name: 'María Fernanda'
+      },
+      {
+        id: '3456789012',
+        name: 'Juan Pablo'
+      },
+
+    ],
+    publications: []
   },
   {
     id: '5678901234',
     name: 'Pedro José',
     lasName: 'Pérez Rodríguez',
     email: 'usuario5@correo.com',
-    profilePicture: '../../assets/perfil-5.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '05/05/1994',
     gender: 'masculino',
     location: 'Chile, Santiago',
-    friendsInCommon: 10
+    friendsList: [
+      {
+        id: '2345678901',
+        name: 'María Fernanda'
+      },
+      {
+        id: '3456789012',
+        name: 'Juan Pablo'
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María'
+      },
+      {
+        id: '5678901234',
+        name: 'Pedro José'
+      }
+    ],
+    publications: []
   },
   {
     id: '6789012345',
     name: 'María José',
     lasName: 'López Martínez',
     email: 'usuario6@correo.com',
-    profilePicture: '../../assets/perfil-6.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '06/06/1995',
     gender: 'femenino',
     location: 'Perú, Lima',
-    friendsInCommon: 23
+    friendsList: [
+      {
+        id: '2345678901',
+        name: 'María Fernanda'
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María'
+      },
+      {
+        id: '5678901234',
+        name: 'Pedro José'
+      }
+    ],
+    publications: [
+      {
+        description: 'que tal les parece esto',
+        reactions: 200,
+        comments: 10,
+        image: imagePublications.image_1,
+        date: new Date()
+      }
+    ],
   },
   {
     id: '7890123456',
     name: 'Juan Carlos',
     lasName: 'Gómez Fernández',
     email: 'usuario7@correo.com',
-    profilePicture: '../../assets/perfil-7.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '07/07/1996',
     gender: 'masculino',
     location: 'Uruguay, Montevideo',
-    friendsInCommon: 54
+    friendsList: [
+      {
+        id: '2345678901',
+        name: 'María Fernanda'
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María'
+      },
+      {
+        id: '5678901234',
+        name: 'Pedro José'
+      }
+    ],
+    publications: []
   },
   {
     id: '8901234567',
     name: 'Fernanda',
     lasName: 'Martínez López',
     email: 'usuario8@correo.com',
-    profilePicture: '../../assets/perfil-8.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '08/08/1997',
     gender: 'femenino',
     location: 'Ecuador, Quito',
-    friendsInCommon: 34
+    friendsList: [
+    ],
+    publications: []
   },
   {
     id: '9012345678',
     name: 'Pablo',
     lasName: 'Hernández Rodríguez',
     email: 'usuario9@correo.com',
-    profilePicture: '../../assets/perfil-9.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '09/09/1998',
     gender: 'masculino',
     location: 'Paraguay, Asunción',
-    friendsInCommon: 7
+    friendsList: [
+      {
+        id: '2345678901',
+        name: 'María Fernanda'
+      },
+      {
+        id: '3456789012',
+        name: 'Juan Pablo'
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María'
+      },
+      {
+        id: '5678901234',
+        name: 'Pedro José'
+      }
+    ],
+    publications: []
   },
   {
     id: '0123456789',
     name: 'Carolina',
     lasName: 'García Pérez',
     email: 'usuario10@correo.com',
-    profilePicture: '../../assets/perfil-10.png',
+    profilePicture: imageProfile.profile_1,
     birthDate: '10/10/1999',
     gender: 'femenino',
     location: 'Brasil, São Paulo',
-    friendsInCommon: 7
+    friendsList: [
+      {
+        id: '2345678901',
+        name: 'María Fernanda'
+      },
+      {
+        id: '3456789012',
+        name: 'Juan Pablo'
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María'
+      },
+      {
+        id: '5678901234',
+        name: 'Pedro José'
+      }
+    ],
+    publications: []
   }
 ];

@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { usuariosFacebook } from '../../../data/dataUsers'
+import { imageProfile } from '../../../../assets/images/users'
 
-export default CardFriend = ({name, friendsInCommon}) => {
+const user = usuariosFacebook[0]
+
+export default CardFriend = ({id, name, friendsList}) => {
+    const [friendsInCommon, setFriendsInCommon] = useState(null)
+    
+    const countFriendsInCommon = () => {
+        const userFriendsList = user.friendsList.map(friend => friend.id);
+        const friendsListOtherUser = friendsList.map(friend => friend.id);
+
+        const commonFriends = userFriendsList.filter(id => friendsListOtherUser.includes(id));
+        setFriendsInCommon(commonFriends.length)
+    }
+    
+    useEffect(() => {
+        countFriendsInCommon()
+    }, [id])
+    
     return (
         <View style={styles.cardFriend}>
             <Image
                 style={styles.image}
-                source={require('../../../../assets/perfil-1.png')}
+                source={imageProfile.profile_1}
             />
             <View style={styles.contentInfo}>
                 <View style={styles.contentName}>
