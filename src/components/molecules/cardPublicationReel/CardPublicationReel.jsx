@@ -1,26 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
-import { AntDesign, EvilIcons, Ionicons, Foundation } from '@expo/vector-icons';
+import { AntDesign, EvilIcons, Ionicons, Foundation, Feather } from '@expo/vector-icons';
 import { Video, ResizeMode } from 'expo-av';
 
-export default CardPublicationReel = ({image, idUser, date, description, reactions ,comments}) => {
+
+export default CardPublicationReel = ({image, idUser, date, description, reactions, comments, position, visibleIndex}) => {
     const video = useRef(null);
-    const [user, setUser] = useState(null)
-    const [status, setStatus] = useState({});
-    const position = 0
-    useEffect(() => {
-      if (position === 0 ) {
-        setStatus({ shouldPlay: true });
-      }else{
-        setStatus({ shouldPlay: false });
-      }
-    }, []);
+    const [user, setUser] = useState(null);
+    const [sound, setSound] = useState(true);
 
     useEffect(() => {
         const result = usuariosFacebook.filter((user) => user.id === idUser)[0];
-        setUser(result)
-    }, [idUser])
+        setUser(result);
+    }, [idUser]);
+
+    useEffect(() => {
+        if (position === visibleIndex) {
+            video.current?.playAsync();
+        } else {
+            video.current?.pauseAsync();
+        }
+    }, [position, visibleIndex]);
+
+    const handlePressSound = () => {
+        setSound(!sound)
+        video.current.setVolumeAsync(sound ? 0 : 1);
+    }
     
     return (
         <View style={styles.cardPublication}>
@@ -38,18 +44,23 @@ export default CardPublicationReel = ({image, idUser, date, description, reactio
             <View style={styles.contentDescription}>
                 <Text style={styles.textDescription}>{description}</Text>
             </View>
-            
-            <Video
-                ref={video}
-                style={styles.image}
-                source={image}
-                useNativeControls={false}
-                resizeMode={ResizeMode.CONTAIN}
-                shouldPlay={status.shouldPlay}
-                isLooping
-                isMuted
-                onPlaybackStatusUpdate={status => setStatus(() => status)}
-            />
+
+            <View style={styles.contentVideo}>
+                <Video
+                    ref={video}
+                    style={styles.image}
+                    source={image}
+                    useNativeControls={false}
+                    resizeMode={ResizeMode.CONTAIN}
+                    isLooping
+                    shouldPlay={position === visibleIndex}
+                />
+                {sound ?
+                    <Feather name="volume-2" size={24} color="black" style={styles.buttonSound} onPress={handlePressSound}/>
+                    :
+                    <Feather name="volume-x" size={24} color="black" style={styles.buttonSound} onPress={handlePressSound}/>            
+                }
+            </View>
             
             <View style={styles.contentReactions}>
                 <TouchableHighlight style={styles.buttonReaction}>
@@ -73,30 +84,30 @@ export default CardPublicationReel = ({image, idUser, date, description, reactio
             </View>
             
             <View style={styles.contentButtons}>
-                <TouchableHighlight style={styles.button}>
+                <TouchableOpacity style={styles.button}>
                     <>
                         <AntDesign name="like2" size={20} color="#65676B" style={styles.iconButton}/>
                         <Text style={styles.textButton}>
                             Me gusta
                         </Text>
                     </>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button}>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
                     <>
                         <EvilIcons name="comment" size={24} color="#65676B" style={styles.iconButton}/>
                         <Text style={styles.textButton}>
                             Comentar
                         </Text>
                     </>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button}>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
                     <>
                         <Ionicons name="arrow-redo-outline" size={20} color="#65676B" style={styles.iconButton}/>
                         <Text style={styles.textButton}>
                             Compartir
                         </Text>
                     </>
-                </TouchableHighlight>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -170,5 +181,13 @@ const styles = StyleSheet.create({
     },
     buttonReactionIcon:{
         marginRight: 2,
+    },
+    contentVideo:{
+        position: 'relative'
+    },
+    buttonSound:{
+        position: 'absolute',
+        bottom: 15,
+        right: 15
     }
 })

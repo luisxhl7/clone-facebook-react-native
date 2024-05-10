@@ -1,18 +1,33 @@
-import React from 'react'
-import { ScrollView, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { FlatList} from 'react-native'
 import { dataReels } from '../data/dataReels'
-import CardPublication from '../components/molecules/cardPublication/CardPublication'
 import CardPublicationReel from '../components/molecules/cardPublicationReel/CardPublicationReel'
+import { useIsFocused } from '@react-navigation/native';
 
 const ReelsScreen = () => {
+  const isFocused = useIsFocused();
+  const [visibleIndex, setVisibleIndex] = useState(-1);
+
+  const onViewableItemsChanged = ({ viewableItems }) => {
+    if (viewableItems.length > 0) {
+      setVisibleIndex(viewableItems[0].index);
+    }
+  };
+  if (!isFocused) {
+    return <>
+    </>
+  }
+  
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View>
-        {dataReels.map( item => (
-          <CardPublicationReel {...item} key={item.idPublication}/>
-        ))}
-      </View>
-    </ScrollView>
+    <FlatList
+      data={dataReels}
+      renderItem={({item, index}) => (
+        <CardPublicationReel {...item} position={index} visibleIndex={visibleIndex}/>
+      )}
+      onViewableItemsChanged={onViewableItemsChanged}
+      viewabilityConfig={{ itemVisiblePercentThreshold: 60 }}
+      keyExtractor={(item, index) => index.toString()}
+    />
   )
 }
 
