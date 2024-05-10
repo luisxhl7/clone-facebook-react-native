@@ -1,9 +1,9 @@
-import image_1 from "./419982979_24934396762840885_5528549817471065971_n.jpg";
-import image_2 from "./427840038_242524132220152_8127169000154376477_n.jpg";
-import image_3 from "./436816630_410770398370630_182107511887956819_n.jpg";
-import image_4 from "./438080562_813953913987284_5109221758680465794_n.jpg";
-import image_5 from "./438135015_1487494178846759_5567124525396385517_n.jpg";
-import image_6 from "./441028880_10229115498266530_1820730578561553970_n.jpg";
+import image_1 from "./image-1.webp";
+import image_2 from "./image-2.webp";
+import image_3 from "./image-3.webp";
+import image_4 from "./image-4.webp";
+import image_5 from "./image-5.webp";
+import image_6 from "./image-6.webp";
 
 export const imageMarkets = {
     image_1,
