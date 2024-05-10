@@ -12,11 +12,9 @@ export default HomeScreen = () => {
                 <Thoughts/>
                 <NavigateHistoriesAndReels/>
             </View>
-            <View>
-                {dataPublications.map( item => (
-                    <CardPublication {...item} key={item.idPublication}/>
-                ))}
-            </View>
+            {dataPublications.map( item => (
+                <CardPublication {...item} key={item.idPublication}/>
+            ))}
         </ScrollView>
     )
 }

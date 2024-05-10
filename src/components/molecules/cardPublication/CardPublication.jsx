@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
-import { AntDesign, EvilIcons, Ionicons, Foundation } from '@expo/vector-icons';
+import {Foundation } from '@expo/vector-icons';
+import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
 
 export default CardPublication = ({image, idUser, date, description, reactions ,comments}) => {
     const [user, setUser] = useState(null)
@@ -53,33 +54,7 @@ export default CardPublication = ({image, idUser, date, description, reactions ,
                     }
                 </TouchableHighlight>
             </View>
-            
-            <View style={styles.contentButtons}>
-                <TouchableHighlight style={styles.button}>
-                    <>
-                        <AntDesign name="like2" size={20} color="#65676B" style={styles.iconButton}/>
-                        <Text style={styles.textButton}>
-                            Me gusta
-                        </Text>
-                    </>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button}>
-                    <>
-                        <EvilIcons name="comment" size={24} color="#65676B" style={styles.iconButton}/>
-                        <Text style={styles.textButton}>
-                            Comentar
-                        </Text>
-                    </>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button}>
-                    <>
-                        <Ionicons name="arrow-redo-outline" size={20} color="#65676B" style={styles.iconButton}/>
-                        <Text style={styles.textButton}>
-                            Compartir
-                        </Text>
-                    </>
-                </TouchableHighlight>
-            </View>
+            <ContentButtonsPublication/>
         </View>
     )
 }
@@ -112,27 +87,10 @@ const styles = StyleSheet.create({
     textDescription:{
         fontSize: 13
     },
-    contentButtons:{
-        flexDirection: 'row',
-        borderTopWidth: 1,
-        marginHorizontal: 10,
-        borderColor: '#aeb3bd'
-    },
     image:{
         height: 350,
         width: '100%',
         resizeMode: 'cover'
-    },
-    button:{
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 10
-    },
-    textButton:{
-        textAlign: 'center',
-        color: '#65676B',
     },
     contentReactions:{
         marginHorizontal: 10,

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
-import { AntDesign, EvilIcons, Ionicons, Foundation, Feather } from '@expo/vector-icons';
+import {Foundation, Feather } from '@expo/vector-icons';
 import { Video, ResizeMode } from 'expo-av';
-
+import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
 
 export default CardPublicationReel = ({image, idUser, date, description, reactions, comments, position, visibleIndex}) => {
     const video = useRef(null);
@@ -83,32 +83,7 @@ export default CardPublicationReel = ({image, idUser, date, description, reactio
                 </TouchableHighlight>
             </View>
             
-            <View style={styles.contentButtons}>
-                <TouchableOpacity style={styles.button}>
-                    <>
-                        <AntDesign name="like2" size={20} color="#65676B" style={styles.iconButton}/>
-                        <Text style={styles.textButton}>
-                            Me gusta
-                        </Text>
-                    </>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <>
-                        <EvilIcons name="comment" size={24} color="#65676B" style={styles.iconButton}/>
-                        <Text style={styles.textButton}>
-                            Comentar
-                        </Text>
-                    </>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <>
-                        <Ionicons name="arrow-redo-outline" size={20} color="#65676B" style={styles.iconButton}/>
-                        <Text style={styles.textButton}>
-                            Compartir
-                        </Text>
-                    </>
-                </TouchableOpacity>
-            </View>
+            <ContentButtonsPublication/>
         </View>
     )
 }
@@ -143,7 +118,7 @@ const styles = StyleSheet.create({
     },
     contentButtons:{
         flexDirection: 'row',
-        borderTopWidth: 1,
+        borderTopWidth: .5,
         marginHorizontal: 10,
         borderColor: '#aeb3bd'
     },

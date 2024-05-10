@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FlatList} from 'react-native'
 import { dataReels } from '../data/dataReels'
 import CardPublicationReel from '../components/molecules/cardPublicationReel/CardPublicationReel'

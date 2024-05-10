@@ -1,10 +1,25 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import CardMarket from '../components/molecules/cardMarket/CardMarket'
+import { dataMarket } from '../data/dataMarkets'
 
-const MarketPlace = () => {
+export default MarketPlace = () => {
   return (
-    <Text>MarketPlace</Text>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.contentCards}>
+        {dataMarket.map( item => (
+          <CardMarket key={item.id} {...item}/>
+        ))}
+      </View>
+    </ScrollView>
   )
 }
 
-export default MarketPlace
+const styles = StyleSheet.create({
+  contentCards:{
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  }
+})
