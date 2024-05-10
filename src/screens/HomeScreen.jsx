@@ -5,8 +5,6 @@ import NavigateHistoriesAndReels from '../navigate/NavigateHistoriesAndReels'
 import { dataPublications } from '../data/dataPublications'
 import CardPublication from '../components/molecules/cardPublication/CardPublication'
 
-const data = dataPublications
-
 export default HomeScreen = () => {
     return (
         <ScrollView>
@@ -15,7 +13,7 @@ export default HomeScreen = () => {
                 <NavigateHistoriesAndReels/>
             </View>
             <View>
-                {data.map( item => (
+                {dataPublications.map( item => (
                     <CardPublication {...item} key={item.idPublication}/>
                 ))}
             </View>

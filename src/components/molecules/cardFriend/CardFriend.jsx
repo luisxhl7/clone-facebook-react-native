@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
-import { imageProfile } from '../../../../assets/images/users'
 
 const user = usuariosFacebook[0]
 
-export default CardFriend = ({id, name, friendsList}) => {
+export default CardFriend = ({id, name, friendsList, profilePicture}) => {
     const [friendsInCommon, setFriendsInCommon] = useState(null)
     
     const countFriendsInCommon = () => {
@@ -24,7 +23,7 @@ export default CardFriend = ({id, name, friendsList}) => {
         <View style={styles.cardFriend}>
             <Image
                 style={styles.image}
-                source={imageProfile.profile_1}
+                source={profilePicture}
             />
             <View style={styles.contentInfo}>
                 <View style={styles.contentName}>

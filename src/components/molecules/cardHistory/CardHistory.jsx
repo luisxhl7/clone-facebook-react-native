@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import { imageProfile } from '../../../../assets/images/users'
+import { usuariosFacebook } from '../../../data/dataUsers'
 
-export default CardHistory = () => {
+export default CardHistory = ({idUser, histories}) => {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const result = usuariosFacebook.filter((user) => user.id === idUser)[0];
+    setUser(result)
+}, [idUser])
+
   return (
     <View style={styles.cardHistory}>
-      <Image
-        style={styles.imageUser}
-        source={imageProfile.profile_1}
-      />
+      <View style={styles.contentImageUser}>
+        <Image
+          style={styles.imageUser}
+          source={user?.profilePicture}
+        />
+      </View>
       <Image
         style={styles.history}
-        source={imageProfile.profile_1}
+        source={histories[0].history}
       />
-      <Text style={styles.text}>Juan</Text>
+      <Text style={styles.text}>{user?.name}</Text>
     </View>
   )
 }
@@ -28,14 +37,21 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden'
   },
-  imageUser:{
-    width: 30, 
-    height: 30,
+  contentImageUser:{
     zIndex: 99,
     position: 'absolute',
-    top: 5,
+    top: 7,
+    left: 7,
+    backgroundColor: 'transparent',
+    borderWidth: 3,
+    borderColor: '#0866ff',
     borderRadius: 50,
-    left: 5,
+    padding: 2
+  },
+  imageUser:{
+    borderRadius: 50,
+    width: 28, 
+    height: 28,
   },
   history:{
     height: 200,

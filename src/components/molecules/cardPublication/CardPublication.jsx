@@ -38,7 +38,7 @@ export default CardPublication = ({image, idUser, date, description, reactions ,
                     {reactions.length > 0 ?
                         <>
                             <Foundation name="like" size={22} color="#0866ff" style={styles.buttonReactionIcon}/>
-                            <Text style={styles.buttonReactionText}>{reactions.length} like</Text>
+                            <Text style={styles.buttonReactionText}>{reactions.length}</Text>
                         </>
                         :
                         <>
@@ -119,7 +119,9 @@ const styles = StyleSheet.create({
         borderColor: '#aeb3bd'
     },
     image:{
-        height: 350
+        height: 350,
+        width: '100%',
+        resizeMode: 'cover'
     },
     button:{
         flex: 1,
