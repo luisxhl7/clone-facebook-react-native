@@ -7,7 +7,7 @@ import CardPublication from '../components/molecules/cardPublication/CardPublica
 
 export default HomeScreen = () => {
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.home}>
                 <Thoughts/>
                 <NavigateHistoriesAndReels/>

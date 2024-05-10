@@ -1,9 +1,18 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { ScrollView, View } from 'react-native'
+import { dataReels } from '../data/dataReels'
+import CardPublication from '../components/molecules/cardPublication/CardPublication'
+import CardPublicationReel from '../components/molecules/cardPublicationReel/CardPublicationReel'
 
 const ReelsScreen = () => {
   return (
-    <Text>ReelsScreen</Text>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View>
+        {dataReels.map( item => (
+          <CardPublicationReel {...item} key={item.idPublication}/>
+        ))}
+      </View>
+    </ScrollView>
   )
 }
 
