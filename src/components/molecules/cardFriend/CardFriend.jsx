@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
 
 const user = usuariosFacebook[0]
@@ -34,12 +34,12 @@ export default CardFriend = ({id, name, friendsList, profilePicture}) => {
                     <Text style={styles.textOpacity}>{friendsInCommon} amigos en común</Text>
                 </View>
                 <View style={styles.contentButtons}>
-                    <TouchableHighlight style={styles.button}>
+                    <TouchableOpacity style={styles.button}>
                         <Text style={styles.textButton}>Confirmar</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.buttonDelete}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonDelete}>
                         <Text style={styles.textButtonBlack}>Eliminar</Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>

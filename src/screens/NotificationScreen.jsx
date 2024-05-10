@@ -1,10 +1,27 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { AntDesign } from '@expo/vector-icons';
 
-const NotificationScreen = () => {
+export default NotificationScreen = () => {
   return (
-    <Text>NotificationScreen</Text>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.contentSearch}>
+        <Text style={styles.title}>Notificaciones</Text>
+        <AntDesign name="search1" size={18} color="black" />
+      </View>
+    </ScrollView>
   )
 }
 
-export default NotificationScreen
+const styles = StyleSheet.create({
+  contentSearch:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingTop: 7,
+  },
+  title:{
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+})

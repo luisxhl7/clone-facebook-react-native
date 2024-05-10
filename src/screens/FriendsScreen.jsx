@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import CardFriend from '../components/molecules/cardFriend/CardFriend';
 import { usuariosFacebook } from '../data/dataUsers';
@@ -14,21 +14,21 @@ export default FriendsScreen = () => {
         <AntDesign name="search1" size={18} color="black" />
       </View>
       <View style={styles.contentButtons}>
-        <TouchableHighlight style={styles.button}>
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.textButton}>Sugerencias</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.textButton}>Tus amigos</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.textButton}>Mejores amigos</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
       <View style={styles.moreFriends}>
         <Text style={styles.caption}>Solicitudes de amistad</Text>
-        <TouchableHighlight>
+        <TouchableOpacity>
           <Text style={styles.textMore}>Ver todo</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
       <View>
         {usuariosFacebook.map( item =>
