@@ -68,7 +68,7 @@ export default CardPublication = ({image, idUser, date, description, reactions ,
                 </TouchableHighlight>
             </View>
 
-            <ContentButtonsPublication/>
+            <ContentButtonsPublication navigation={navigation}/>
         </View>
     )
 }

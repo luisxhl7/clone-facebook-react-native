@@ -1,35 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { AntDesign, EvilIcons, Ionicons } from '@expo/vector-icons';
+import { Audio } from 'expo-av';
 
-export default ContentButtonsPublication = () => {
+export default ContentButtonsPublication = ({navigation}) => {
+    const [isLike, setIsLike] = useState(false);
+    const [sound, setSound] = useState();
+
+    const handleLikePublication = async() => {
+        if (!isLike) {
+            const { sound } = await Audio.Sound.createAsync( require('../../../../assets/sounds/like-sound.mp3')
+            );
+            setSound(sound);
+            await sound.playAsync();
+        }
+        setIsLike(!isLike)
+    }
+
+    const handleRedirect = () => {
+        navigation.push('commentspublication')
+    }
+
+    useEffect(() => {
+        return sound
+          ? () => {
+              sound.unloadAsync();
+            }
+          : undefined;
+    }, [isLike]);
+
     return (
         <View style={styles.contentButtons}>
-        <TouchableOpacity style={styles.button}>
-            <>
-                <AntDesign name="like2" size={20} color="#65676B" style={styles.iconButton}/>
-                <Text style={styles.textButton}>
-                    Me gusta
-                </Text>
-            </>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-            <>
-                <EvilIcons name="comment" size={24} color="#65676B" style={styles.iconButton}/>
-                <Text style={styles.textButton}>
-                    Comentar
-                </Text>
-            </>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-            <>
-                <Ionicons name="arrow-redo-outline" size={20} color="#65676B" style={styles.iconButton}/>
-                <Text style={styles.textButton}>
-                    Compartir
-                </Text>
-            </>
-        </TouchableOpacity>
-    </View>
+            <TouchableOpacity style={styles.button} onPress={handleLikePublication}>
+                <>
+                    <AntDesign name="like2" size={20} color={isLike ? '#0866ff': "#65676B"} style={styles.iconButton}/>
+                    <Text style={{...styles.textButton, color: isLike ? '#0866ff': "#65676B"}}>
+                        Me gusta
+                    </Text>
+                </> 
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleRedirect}>
+                <>
+                    <EvilIcons name="comment" size={24} color="#65676B" style={styles.iconButton}/>
+                    <Text style={styles.textButton}>
+                        Comentar
+                    </Text>
+                </>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <>
+                    <Ionicons name="arrow-redo-outline" size={20} color="#65676B" style={styles.iconButton}/>
+                    <Text style={styles.textButton}>
+                        Compartir
+                    </Text>
+                </>
+            </TouchableOpacity>
+        </View>
     )
 }
 

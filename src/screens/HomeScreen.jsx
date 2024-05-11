@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Thoughts from '../components/organisms/thoughts/Thoughts'
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native'
 import NavigateHistoriesAndReels from '../navigate/NavigateHistoriesAndReels'
