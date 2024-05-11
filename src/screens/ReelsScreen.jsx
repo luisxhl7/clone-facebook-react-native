@@ -4,7 +4,7 @@ import { dataReels } from '../data/dataReels'
 import CardPublicationReel from '../components/molecules/cardPublicationReel/CardPublicationReel'
 import { useIsFocused } from '@react-navigation/native';
 
-const ReelsScreen = () => {
+export default ReelsScreen = () => {
   const isFocused = useIsFocused();
   const [visibleIndex, setVisibleIndex] = useState(-1);
 
@@ -30,5 +30,3 @@ const ReelsScreen = () => {
     />
   )
 }
-
-export default ReelsScreen

@@ -48,7 +48,7 @@ export default CardPublicationReel = ({image, idUser, date, description, reactio
             <View style={styles.contentVideo}>
                 <Video
                     ref={video}
-                    style={styles.image}
+                    style={styles.video}
                     source={image}
                     useNativeControls={false}
                     resizeMode={ResizeMode.CONTAIN}
@@ -56,9 +56,9 @@ export default CardPublicationReel = ({image, idUser, date, description, reactio
                     shouldPlay={position === visibleIndex}
                 />
                 {sound ?
-                    <Feather name="volume-2" size={24} color="black" style={styles.buttonSound} onPress={handlePressSound}/>
+                    <Feather name="volume-2" size={24} color="#ffffff" style={styles.buttonSound} onPress={handlePressSound}/>
                     :
-                    <Feather name="volume-x" size={24} color="black" style={styles.buttonSound} onPress={handlePressSound}/>            
+                    <Feather name="volume-x" size={24} color="#ffffff" style={styles.buttonSound} onPress={handlePressSound}/>            
                 }
             </View>
             
@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         borderColor: '#aeb3bd'
     },
-    image:{
-        height: 690,
+    video:{
+        height: 500,
         width: '100%',
     },
     button:{
@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
         marginRight: 2,
     },
     contentVideo:{
-        position: 'relative'
+        position: 'relative',
+        backgroundColor: '#000000'
     },
     buttonSound:{
         position: 'absolute',
