@@ -1,12 +1,26 @@
-import React from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useCallback, useState } from 'react'
+import { RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import CardMarket from '../components/molecules/cardMarket/CardMarket'
 import { dataMarket } from '../data/dataMarkets'
 import { AntDesign, Feather } from '@expo/vector-icons';
 
 export default MarketPlace = () => {
+  const [refreshing, setRefreshing] = useState(false);
+    
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView 
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <View style={styles.contentSearch}>
         <Text style={styles.title}>Marketplace</Text>
         <AntDesign name="search1" size={18} color="black" />

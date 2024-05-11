@@ -4,7 +4,7 @@ import { usuariosFacebook } from '../../../data/dataUsers'
 import {Foundation } from '@expo/vector-icons';
 import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
 
-export default CardPublication = ({image, idUser, date, description, reactions ,comments}) => {
+export default CardPublication = ({image, idUser, date, description, reactions ,comments, navigation}) => {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
@@ -14,16 +14,22 @@ export default CardPublication = ({image, idUser, date, description, reactions ,
     
     return (
         <View style={styles.cardPublication}>
-            <View style={styles.info}>
-                <Image
-                    style={styles.imageUser}
-                    source={user?.profilePicture}
-                />
-                <View>
-                    <Text>{user?.name}</Text>
-                    <Text style={styles.textDate}>{date.toLocaleDateString()}</Text>
-                </View>
-            </View>
+            <TouchableHighlight 
+                style={styles.info} 
+                underlayColor="transparent"
+                onPress={() => navigation.navigate('profileUser')}
+            >
+                <>
+                    <Image
+                        style={styles.imageUser}
+                        source={user?.profilePicture}
+                    />
+                    <View>
+                        <Text>{user?.name}</Text>
+                        <Text style={styles.textDate}>{date.toLocaleDateString()}</Text>
+                    </View>
+                </>
+            </TouchableHighlight>
 
             <View style={styles.contentDescription}>
                 <Text style={styles.textDescription}>{description}</Text>
@@ -31,6 +37,7 @@ export default CardPublication = ({image, idUser, date, description, reactions ,
             
             <Image
                 style={styles.image}
+                fadeDuration={300}
                 source={image}
             />
             

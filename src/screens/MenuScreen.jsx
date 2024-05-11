@@ -3,7 +3,7 @@ import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import { AntDesign, MaterialIcons, FontAwesome, Feather, MaterialCommunityIcons, FontAwesome6, Foundation  } from '@expo/vector-icons';
 import { usuariosFacebook } from '../data/dataUsers';
 
-export default MenuScreen = () => {
+export default MenuScreen = ({ navigation }) => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default MenuScreen = () => {
         </View>
         <View style={styles.contentButtons}>
 
-          <TouchableOpacity style={styles.cardLink}>
+          <TouchableOpacity style={styles.cardLink} onPress={() => navigation.navigate('friends')}>
             <Feather name="users" size={22} color="black" />
             <Text style={styles.text}>Amigos</Text>
           </TouchableOpacity>

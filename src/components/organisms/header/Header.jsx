@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#ffffff'
     },
     title:{
         fontSize: 27,
