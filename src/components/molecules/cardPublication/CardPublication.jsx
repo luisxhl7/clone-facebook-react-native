@@ -12,12 +12,18 @@ export default CardPublication = ({image, idUser, date, description, reactions ,
         setUser(result)
     }, [idUser])
     
+    const handleRedirect = () => {
+        navigation.push('profileUser', {
+            idUser: idUser
+        })
+    }
+
     return (
         <View style={styles.cardPublication}>
             <TouchableHighlight 
                 style={styles.info} 
                 underlayColor="transparent"
-                onPress={() => navigation.navigate('profileUser')}
+                onPress={handleRedirect}
             >
                 <>
                     <Image
@@ -61,6 +67,7 @@ export default CardPublication = ({image, idUser, date, description, reactions ,
                     }
                 </TouchableHighlight>
             </View>
+
             <ContentButtonsPublication/>
         </View>
     )

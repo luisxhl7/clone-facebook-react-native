@@ -18,7 +18,11 @@ export default MarketPlace = () => {
     <ScrollView 
       showsVerticalScrollIndicator={false}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        <RefreshControl 
+          refreshing={refreshing} 
+          onRefresh={onRefresh} 
+          colors={['#0866ff']}
+        />
       }
     >
       <View style={styles.contentSearch}>

@@ -4,6 +4,7 @@ import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native'
 import NavigateHistoriesAndReels from '../navigate/NavigateHistoriesAndReels'
 import { dataPublications } from '../data/dataPublications'
 import CardPublication from '../components/molecules/cardPublication/CardPublication'
+import TextEndPublications from '../components/atoms/textEndPublications/TextEndPublications'
 
 export default HomeScreen = ({navigation}) => {
     const [refreshing, setRefreshing] = useState(false);
@@ -14,12 +15,16 @@ export default HomeScreen = ({navigation}) => {
           setRefreshing(false);
         }, 2000);
     }, []);
-
+    
     return (
         <ScrollView 
             showsVerticalScrollIndicator={false} 
             refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                <RefreshControl 
+                    refreshing={refreshing} 
+                    onRefresh={onRefresh} 
+                    colors={['#0866ff']}
+                />
             }
         >
             <View style={styles.home}>
@@ -29,6 +34,7 @@ export default HomeScreen = ({navigation}) => {
             {dataPublications.map( item => (
                 <CardPublication {...item} key={item.idPublication} navigation={navigation}/>
             ))}
+            <TextEndPublications/>
         </ScrollView>
     )
 }

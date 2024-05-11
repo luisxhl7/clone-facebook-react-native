@@ -38,6 +38,16 @@ export const dataPublications = [
   },
   {
     idUser: '5678901234',
+    idPublication: '090909072',
+    description: 'Linterna Verde - Avance avance | Tom Holanda 2024',
+    image: imagePublications.image_2,
+    date: new Date(),
+    reactions: [12322,123123,123123,53453,1123,123123],
+    comments: [
+    ],
+  },
+  {
+    idUser: '5678901234',
     idPublication: '09090906',
     description: 'Definitivamente Negan es y sera el mejor personaje de esta franquicia',
     image: imagePublications.image_4,

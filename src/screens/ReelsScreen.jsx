@@ -31,7 +31,11 @@ export default ReelsScreen = () => {
     <FlatList
       data={dataReels}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        <RefreshControl 
+          refreshing={refreshing} 
+          onRefresh={onRefresh} 
+          colors={['#0866ff']}
+        />
       }
       renderItem={({item, index}) => (
         <CardPublicationReel {...item} position={index} visibleIndex={visibleIndex}/>

@@ -98,24 +98,6 @@ const styles = StyleSheet.create({
   },
   text:{
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   contentSearch:{
     flexDirection: 'row',
     justifyContent: 'space-between',
