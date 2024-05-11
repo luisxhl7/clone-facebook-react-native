@@ -8,7 +8,7 @@ export default CardHistory = ({idUser, histories}) => {
   useEffect(() => {
     const result = usuariosFacebook.filter((user) => user.id === idUser)[0];
     setUser(result)
-}, [idUser])
+  }, [idUser])
 
   return (
     <View style={styles.cardHistory}>
