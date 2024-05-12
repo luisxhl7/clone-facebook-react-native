@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
 import { SimpleLineIcons } from '@expo/vector-icons';
 
-export default CardNotification = ({idUser, notification, date}) => {
+export default CardNotification = ({idUser, notification, dateNotification}) => {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export default CardNotification = ({idUser, notification, date}) => {
             <View style={styles.description}>
                 <Text style={styles.TextName}>{user?.name}</Text>
                 <Text style={styles.notificationText} numberOfLines={2} ellipsizeMode="tail">{notification}</Text>
-                <Text style={styles.textDate}>{date.toLocaleDateString()}</Text>
+                <Text style={styles.textDate}>{dateNotification}</Text>
             </View>
             <TouchableOpacity style={styles.contentButton}>
                 <SimpleLineIcons name="options" size={15} color="black" />

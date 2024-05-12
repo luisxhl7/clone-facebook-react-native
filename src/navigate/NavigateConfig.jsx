@@ -1,17 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AntDesign } from '@expo/vector-icons';
 import TabsTopNavigator from './TabsTopNavigator';
 import FriendsScreen from '../screens/FriendsScreen';
 import ProfileUserScreen from '../screens/ProfileUserScreen';
-import { AntDesign } from '@expo/vector-icons';
 import CommentsPublicationScreen from '../screens/CommentsPublicationScreen';
 import { LoginScreen } from '../screens/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
 const NavigateConfig = () => {
-    
-    const isLogin = true
+    const {status} = useSelector( (state) => state.auth);
+
+    const isLogin = status === 'authenticated'
 
     return (
         <Stack.Navigator
@@ -20,35 +22,35 @@ const NavigateConfig = () => {
                 gestureDirection: 'vertical',
             }}
         >
-            {isLogin ?
-            <>
-                <Stack.Screen name="tabs" component={TabsTopNavigator} options={{ headerShown: false }}/>
-                <Stack.Screen name="friends" component={FriendsScreen} />
-                <Stack.Screen name="profileUser" component={ProfileUserScreen} 
-                    options={{
-                        animation: 'slide_from_right',
-                        headerTitle: '',
-                        headerRight: () => (
-                            <AntDesign name="search1" size={18} color="black" onPress={() => alert('Buscador')}/>
-                        )
-                    }}
-                />
-                <Stack.Screen name="commentspublication" component={CommentsPublicationScreen} 
-                    options={{
-                        animation: 'slide_from_bottom',
-                        headerTitle: '',
-                        headerRight: () => (
-                            <AntDesign name="search1" size={18} color="black" onPress={() => alert('Buscador')}/>
-                        ),
-                        gestureDirection: 'vertical-inverted'
-                    }}
-                />
-            </>
-            :
-            <>
-                <Stack.Screen name="login" component={LoginScreen} />
-            </>
-        }
+            {!isLogin ?
+                <>
+                    <Stack.Screen name="login" component={LoginScreen} />
+                </>
+                :
+                <>
+                    <Stack.Screen name="tabs" component={TabsTopNavigator} options={{ headerShown: false }}/>
+                    <Stack.Screen name="friends" component={FriendsScreen} />
+                    <Stack.Screen name="profileUser" component={ProfileUserScreen} 
+                        options={{
+                            animation: 'slide_from_right',
+                            headerTitle: '',
+                            headerRight: () => (
+                                <AntDesign name="search1" size={18} color="black" onPress={() => alert('Buscador')}/>
+                            )
+                        }}
+                    />
+                    <Stack.Screen name="commentspublication" component={CommentsPublicationScreen} 
+                        options={{
+                            animation: 'slide_from_bottom',
+                            headerTitle: '',
+                            headerRight: () => (
+                                <AntDesign name="search1" size={18} color="black" onPress={() => alert('Buscador')}/>
+                            ),
+                            gestureDirection: 'vertical-inverted'
+                        }}
+                    />
+                </>
+            }
         </Stack.Navigator>
     )
 }

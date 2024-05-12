@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ScrollView, Text, View } from 'react-native'
+import { Button, ScrollView, View } from 'react-native'
 
 export default CommentsPublicationScreen = ({ navigation }) => {
 

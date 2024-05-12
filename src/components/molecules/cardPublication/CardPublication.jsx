@@ -4,7 +4,7 @@ import { usuariosFacebook } from '../../../data/dataUsers'
 import {Foundation } from '@expo/vector-icons';
 import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
 
-export default CardPublication = ({image, idUser, date, description, reactions ,comments, navigation}) => {
+export default CardPublication = ({image, idUser, datePublication, description, reactions ,comments, navigation}) => {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export default CardPublication = ({image, idUser, date, description, reactions ,
                     />
                     <View>
                         <Text>{user?.name}</Text>
-                        <Text style={styles.textDate}>{date.toLocaleDateString()}</Text>
+                        <Text style={styles.textDate}>{datePublication}</Text>
                     </View>
                 </>
             </TouchableHighlight>

@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { AntDesign, MaterialIcons, FontAwesome, Feather, MaterialCommunityIcons, FontAwesome6, Foundation  } from '@expo/vector-icons';
-import { usuariosFacebook } from '../data/dataUsers';
 
 export default MenuScreen = ({ navigation }) => {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    const result = usuariosFacebook[0];
-    setUser(result)
-  }, [])
+  const {user} = useSelector( (state) => state.auth);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

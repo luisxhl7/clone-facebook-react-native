@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { usuariosFacebook } from '../data/dataUsers';
 import { Ionicons, MaterialCommunityIcons, FontAwesome, SimpleLineIcons   } from '@expo/vector-icons';
-import CardDetailsFriends from '../components/molecules/cardDetailsFriends/CardDetailsFriends';
-import { dataPublications } from '../data/dataPublications';
+import { getPostUser_thunks, getProfileUser_thunks } from '../store/thunks/profileUserThunks';
 import CardPublication from '../components/molecules/cardPublication/CardPublication';
 import TextEndPublications from '../components/atoms/textEndPublications/TextEndPublications';
+import CardDetailsFriends from '../components/molecules/cardDetailsFriends/CardDetailsFriends';
 
 export default ProfileUserScreen = ({ route, navigation }) => {
+  const { usersFriendsList, userPosts } = useSelector( state => state.profileUsers)
   const {idUser} = route.params;
-  const [friend, setFriend] = useState(null)
-  const [publications, setPublications] = useState(null)
+  const dispatch = useDispatch();
   
   useEffect(() => {
-    const result = usuariosFacebook.filter((user) => user.id === idUser)[0];
-    
-    const resultPublications = dataPublications.filter(
-      (publication) => publication.idUser === idUser
-    );
-
-    setFriend(result)
-    setPublications(resultPublications)
+    dispatch( getProfileUser_thunks(idUser))
+    dispatch( getPostUser_thunks(idUser))
   }, [idUser])
 
   return (
@@ -28,15 +22,15 @@ export default ProfileUserScreen = ({ route, navigation }) => {
       <View style={styles.contentImages}>
         <Image
           style={styles.BackgroundImage}
-          source={friend?.profilePicture}
+          source={usersFriendsList?.profilePicture}
         />
         <Image
           style={styles.imageUser}
-          source={friend?.profilePicture}
+          source={usersFriendsList?.profilePicture}
         />
       </View>
       <View style={styles.contentInfoUser}>
-        <Text style={styles.textName}>{`${friend?.name} ${friend?.lastName}`}</Text>
+        <Text style={styles.textName}>{`${usersFriendsList?.name} ${usersFriendsList?.lastName}`}</Text>
         <View style={styles.contentInfoFriendsCommon}>
           <Text> <Text style={styles.textBold}>4</Text> amigos en común</Text>
         </View>
@@ -55,21 +49,21 @@ export default ProfileUserScreen = ({ route, navigation }) => {
         <Text style={styles.titleContentDetails}>Detalles</Text>
         <Text style={styles.textContentDEtails}>
           <FontAwesome name="home" size={18} color="black" /> Vive en 
-          <Text style={styles.textBold}> {friend?.location} </Text>
+          <Text style={styles.textBold}> {usersFriendsList?.location} </Text>
         </Text>
         <TouchableOpacity style={{alignContent:'center', alignItems: 'center', flexDirection:'row'}}>
           <SimpleLineIcons name="options" size={18} color="black" style={{marginRight:5}}/>
           <Text >
-            Ver la información de {friend?.name}
+            Ver la información de {usersFriendsList?.name}
           </Text>
         </TouchableOpacity>
 
         <View style={styles.contentListFriends}>
           <Text style={styles.titleContentDetails}>Amigos</Text>
-          <Text style={styles.titleContentDetails}>{friend?.friendsList.length} ( 3 en común)</Text>
+          <Text style={styles.titleContentDetails}>{usersFriendsList?.friendsList.length} ( 3 en común)</Text>
           
           <View style={styles.contentCardFriends}>
-            {friend?.friendsList.slice(0, 6).map(item => (
+            {usersFriendsList?.friendsList.slice(0, 6).map(item => (
               <CardDetailsFriends 
                 key={item?.id} 
                 {...item} 
@@ -84,7 +78,8 @@ export default ProfileUserScreen = ({ route, navigation }) => {
         <Text style={styles.textButtonBack}>Ver todos los amigos</Text>
       </TouchableOpacity>
       </View>
-      {publications?.map( item => (
+
+      {userPosts?.map( item => (
         <CardPublication {...item} key={item.idPublication} navigation={navigation}/>
       ))}
 

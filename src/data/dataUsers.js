@@ -1,4 +1,3 @@
-import { imagePublications } from "../../assets/images/publications";
 import { imageProfile } from "../../assets/images/users";
 
 export const usuariosFacebook = [
@@ -141,16 +140,7 @@ export const usuariosFacebook = [
         id: '5678901234',
         name: 'Pedro José'
       }
-    ],
-    publications: [
-      {
-        description: 'que tal les parece esto',
-        reactions: 200,
-        comments: 10,
-        image: imagePublications.image_1,
-        date: new Date()
-      }
-    ],
+    ]
   },
   {
     id: '7890123456',

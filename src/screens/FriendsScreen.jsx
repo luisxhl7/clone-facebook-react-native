@@ -1,10 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Text, View } from 'react-native'
 
 export default FriendsScreen = () => {
+    const { user } = useSelector( (state) => state.auth);
+
     return (
         <View>
-            <Text>Aqui estaran todas las amistades del usuario</Text>
+            {user?.friendsList.map( item =>(
+            <Text key={item?.id}>
+                {item?.name}
+            </Text>
+            ))}
         </View>
     )
 }

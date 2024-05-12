@@ -9,7 +9,7 @@ export const dataMarket = [
     price: 90000,
     location: 'Medellin',
     market: [imageMarkets.image_1],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const dataMarket = [
     price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_2],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ export const dataMarket = [
     price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_3],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ export const dataMarket = [
     price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_4],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ export const dataMarket = [
     price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_5],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ export const dataMarket = [
     description: 'Yamaha R6R  Modelo 2009 47.000kms Matriculada Bogotá Soat Septiembre 2024 Tecno Diciembre 2024 Multicolor Precio negociable Wrap Negro/Sky blue Llantas nuevas Pastillas nuevas Espejos rizoma Estabilizador de dirección  Sliders motor Solo seat Luces LED Stop integrado', price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_6],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ export const dataMarket = [
     price: 90000,
     location: 'Medellin',
     market: [imageMarkets.image_1],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 8,
@@ -78,7 +78,7 @@ export const dataMarket = [
     price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_2],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 9,
@@ -88,7 +88,7 @@ export const dataMarket = [
     price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_3],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 10,
@@ -98,7 +98,7 @@ export const dataMarket = [
     price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_4],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 11,
@@ -108,7 +108,7 @@ export const dataMarket = [
     price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_5],
-    date: new Date(),
+    datePublication: 'enero',
   },
   {
     id: 12,
@@ -117,6 +117,6 @@ export const dataMarket = [
     description: 'Yamaha R6R  Modelo 2009 47.000kms Matriculada Bogotá Soat Septiembre 2024 Tecno Diciembre 2024 Multicolor Precio negociable Wrap Negro/Sky blue Llantas nuevas Pastillas nuevas Espejos rizoma Estabilizador de dirección  Sliders motor Solo seat Luces LED Stop integrado', price: 100000,
     location: 'Medellin',
     market: [imageMarkets.image_6],
-    date: new Date(),
+    datePublication: 'enero',
   },
 ];

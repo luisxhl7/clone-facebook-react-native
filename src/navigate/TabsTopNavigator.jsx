@@ -11,7 +11,7 @@ import PageLayout from '../components/templates/pageLayout/PageLayout';
 
 const FirstTab  = createMaterialTopTabNavigator();
 
-const TabsTopNavigator = () => {
+export default TabsTopNavigator = () => {
   return (
     <PageLayout>
       <FirstTab.Navigator 
@@ -72,5 +72,3 @@ const TabsTopNavigator = () => {
     </PageLayout>
   );
 }
-
-export default TabsTopNavigator

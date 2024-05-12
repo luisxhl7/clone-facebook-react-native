@@ -1,10 +1,12 @@
 import React, { useCallback, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import CardMarket from '../components/molecules/cardMarket/CardMarket'
-import { dataMarket } from '../data/dataMarkets'
 import { AntDesign, Feather } from '@expo/vector-icons';
+import CardMarket from '../components/molecules/cardMarket/CardMarket'
 
 export default MarketPlace = () => {
+  const { markets } = useSelector( (state) => state.markets);
+
   const [refreshing, setRefreshing] = useState(false);
     
   const onRefresh = useCallback(() => {
@@ -47,7 +49,7 @@ export default MarketPlace = () => {
         <Text style={styles.textCaption}>Destacados de hoy</Text>
       </View>
       <View style={styles.contentCards}>
-        {dataMarket.map( item => (
+        {markets?.map( item => (
           <CardMarket key={item.id} {...item}/>
         ))}
       </View>

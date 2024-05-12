@@ -1,12 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import CardFriend from '../components/molecules/cardFriend/CardFriend';
-import { usuariosFacebook } from '../data/dataUsers';
-
-const user = usuariosFacebook[0]
 
 export default FriendsRequestsScreen = () => {
+  const { user } = useSelector( (state) => state.auth);
+  const { profileUsers } = useSelector( (state) => state.profileUsers);
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.contentSearch}>
@@ -31,7 +32,7 @@ export default FriendsRequestsScreen = () => {
         </TouchableOpacity>
       </View>
       <View>
-        {usuariosFacebook.map( item =>
+        {profileUsers?.map( item =>
           user.id !== item.id && (
             <CardFriend key={item.id} {...item}/>
           )
