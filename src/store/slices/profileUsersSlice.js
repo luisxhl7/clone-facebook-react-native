@@ -13,7 +13,6 @@ export const profileUsersSlice = createSlice({
     initialState,
     reducers: {
         isLoading: (state, action) => {
-            console.log(action.payload.state);
             state.isLoading = action.payload.state;
         },
         filterUserById: (state, action) => {

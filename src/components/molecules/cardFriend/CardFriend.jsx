@@ -8,10 +8,10 @@ export default CardFriend = ({id, name, friendsList, profilePicture}) => {
     const [friendsInCommon, setFriendsInCommon] = useState(null)
     
     const countFriendsInCommon = () => {
-        const userFriendsList = user.friendsList.map(friend => friend.id);
-        const friendsListOtherUser = friendsList.map(friend => friend.id);
+        const userFriendsList = user.friendsList?.map(friend => friend.id);
+        const friendsListOtherUser = friendsList?.map(friend => friend.id);
 
-        const commonFriends = userFriendsList.filter(id => friendsListOtherUser.includes(id));
+        const commonFriends = userFriendsList?.filter(id => friendsListOtherUser.includes(id));
         setFriendsInCommon(commonFriends.length)
     }
     

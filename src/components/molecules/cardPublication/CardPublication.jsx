@@ -17,7 +17,7 @@ export default CardPublication = ({image, idUser, datePublication, description, 
     
     const handleRedirect = () => {
         dispatch(isLoading({state: true}))
-        navigation.navigate('profileUser', {
+        navigation.push('profileUser', {
             idUser: idUser
         })
     }
