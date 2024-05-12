@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, TouchableHighlight } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
+import { useDispatch } from 'react-redux'
+import { isLoading } from '../../../store/slices/profileUsersSlice'
 
 export default CardDetailsFriends = ({ id, navigation }) => {
+    const dispatch = useDispatch()
     const [friend, setFriend] = useState(null)
 
     useEffect(() => {
@@ -11,6 +14,7 @@ export default CardDetailsFriends = ({ id, navigation }) => {
     }, [id])
 
     const handleRedirect = () => {
+        dispatch(isLoading({state: true}))
         navigation.push('profileUser', {
             idUser: id
         })

@@ -1,13 +1,15 @@
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
-import { imageProfile } from '../../../../assets/images/users';
+import { useSelector } from 'react-redux';
 
 export default Thoughts = () => {
+    const { user } = useSelector( state => state.auth)
+
     return (
         <View style={styles.contentThoughts}>
             <Image
-            source={imageProfile.profile_1}
+            source={user.profilePicture}
             style={styles.image}
             />
             <TouchableHighlight style={styles.buttonThoughts}>

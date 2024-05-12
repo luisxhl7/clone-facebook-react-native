@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { usuariosFacebook } from "../../data/dataUsers";
 
 const initialState = {
-    isLoading: false, //true - false
+    isLoading: true, //true - false
     profileUsers: usuariosFacebook,
-    usersFriendsList: null,
+    userProfileById: null,
     userPosts: null
 };
 
@@ -12,18 +12,23 @@ export const profileUsersSlice = createSlice({
     name: 'profileUsers',
     initialState,
     reducers: {
-        isLoading: (state) => {
-            state.profileUsers = true;
+        isLoading: (state, action) => {
+            console.log(action.payload.state);
+            state.isLoading = action.payload.state;
         },
         filterUserById: (state, action) => {
-            state.usersFriendsList = action.payload.profileUserById;
+            state.userProfileById = action.payload.userProfileById;
         },
         filterUserPostById: (state, action) => {
             state.userPosts = action.payload.userPosts;
         },
+        clearProfileUserData: (state) => {
+            state.userProfileById = null;
+            state.userPosts = null;
+        },
     }
 });
   
-export const { isLoading, filterUserById, filterUserPostById } = profileUsersSlice.actions;
+export const { isLoading, filterUserById, filterUserPostById, clearProfileUserData } = profileUsersSlice.actions;
 
 export default profileUsersSlice.reducer;

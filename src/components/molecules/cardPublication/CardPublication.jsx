@@ -3,8 +3,11 @@ import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
 import {Foundation } from '@expo/vector-icons';
 import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
+import { useDispatch } from 'react-redux';
+import { isLoading } from '../../../store/slices/profileUsersSlice';
 
 export default CardPublication = ({image, idUser, datePublication, description, reactions ,comments, navigation}) => {
+    const dispatch = useDispatch()
     const [user, setUser] = useState(null)
 
     useEffect(() => {
@@ -13,7 +16,8 @@ export default CardPublication = ({image, idUser, datePublication, description, 
     }, [idUser])
     
     const handleRedirect = () => {
-        navigation.push('profileUser', {
+        dispatch(isLoading({state: true}))
+        navigation.navigate('profileUser', {
             idUser: idUser
         })
     }

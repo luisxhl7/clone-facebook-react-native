@@ -1,13 +1,26 @@
-import { filterUserById, filterUserPostById } from "../slices/profileUsersSlice";
+import { clearProfileUserData, filterUserById, filterUserPostById, isLoading } from "../slices/profileUsersSlice";
 
 export const getProfileUser_thunks = (idUser) => {
     return async(dispatch, getState) => {
         try {
-            const {profileUsers} = getState().profileUsers;
             
+            await dispatch(clearProfileUserData());
+
+            const {profileUsers} = await getState().profileUsers;
+            const {user} = await getState().auth;
+            
+            const isFriend = await user.friendsList.some( item => item.id === idUser)
+
             const resp = await profileUsers.filter((user) => user.id === idUser)[0];
             
-            dispatch( filterUserById({profileUserById: resp}) );
+            await dispatch( filterUserById({
+                userProfileById: {
+                    ...resp,
+                    isFriend: isFriend
+                }
+            }));
+
+            dispatch(isLoading({state: false}))
 
         } catch (error) {
             console.error('Error en la solicitud:', error);
@@ -18,11 +31,13 @@ export const getProfileUser_thunks = (idUser) => {
 export const getPostUser_thunks = (idUser) => {
     return async(dispatch, getState) => {
         try {
+            await dispatch(clearProfileUserData());
+
             const {publications} = getState().publications;
             
             const resp = await publications.filter((publication) => publication.idUser === idUser);
 
-            dispatch( filterUserPostById({userPosts: resp}) );
+            await dispatch( filterUserPostById({userPosts: resp}) );
 
         } catch (error) {
             console.error('Error en la solicitud:', error);

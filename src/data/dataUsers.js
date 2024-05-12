@@ -42,6 +42,34 @@ export const usuariosFacebook = [
       {
         id: '5678901234',
         name: 'Pedro José'
+      },
+      {
+        id: '3456789012',
+        name: 'Juan Pablo',
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María',
+      },
+      {
+        id: '6789012345',
+        name: 'María José',
+      },
+      {
+        id: '7890123456',
+        name: 'Juan Carlos',
+      },
+      {
+        id: '8901234567',
+        name: 'Fernanda',
+      },
+      {
+        id: '9012345678',
+        name: 'Pablo',
+      },
+      {
+        id: '0123456789',
+        name: 'Carolina',
       }
     ],
   },

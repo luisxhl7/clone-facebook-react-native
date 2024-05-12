@@ -1,89 +1,109 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Ionicons, MaterialCommunityIcons, FontAwesome, SimpleLineIcons   } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons, FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
 import { getPostUser_thunks, getProfileUser_thunks } from '../store/thunks/profileUserThunks';
 import CardPublication from '../components/molecules/cardPublication/CardPublication';
 import TextEndPublications from '../components/atoms/textEndPublications/TextEndPublications';
 import CardDetailsFriends from '../components/molecules/cardDetailsFriends/CardDetailsFriends';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default ProfileUserScreen = ({ route, navigation }) => {
-  const { usersFriendsList, userPosts } = useSelector( state => state.profileUsers)
+  const { userProfileById, userPosts, isLoading } = useSelector( state => state.profileUsers)
   const {idUser} = route.params;
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch( getProfileUser_thunks(idUser))
-    dispatch( getPostUser_thunks(idUser))
-  }, [idUser])
+
+  useFocusEffect(
+    useCallback(() => {
+      dispatch( getProfileUser_thunks(idUser))
+      dispatch( getPostUser_thunks(idUser))
+    }, [idUser])
+  );
+
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.contentImages}>
-        <Image
-          style={styles.BackgroundImage}
-          source={usersFriendsList?.profilePicture}
-        />
-        <Image
-          style={styles.imageUser}
-          source={usersFriendsList?.profilePicture}
-        />
-      </View>
-      <View style={styles.contentInfoUser}>
-        <Text style={styles.textName}>{`${usersFriendsList?.name} ${usersFriendsList?.lastName}`}</Text>
-        <View style={styles.contentInfoFriendsCommon}>
-          <Text> <Text style={styles.textBold}>4</Text> amigos en común</Text>
+      {!isLoading ?
+      <>
+        <View style={styles.contentImages}>
+          <Image
+            style={styles.BackgroundImage}
+            source={userProfileById?.profilePicture}
+          />
+          <Image
+            style={styles.imageUser}
+            source={userProfileById?.profilePicture}
+          />
         </View>
-        <View style={styles.contentButtons}>
-          <TouchableOpacity style={styles.buttonAdd}>
-            <Ionicons name="person-add" size={18} color="#ffffff" />
-            <Text style={styles.buttonTextAdd}>Añadir amigo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonMessage}>
-            <MaterialCommunityIcons name="facebook-messenger" size={18} color="black" />
-            <Text style={styles.buttonTextMessage}>Enviar mensaje</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.contentDetails}>
-        <Text style={styles.titleContentDetails}>Detalles</Text>
-        <Text style={styles.textContentDEtails}>
-          <FontAwesome name="home" size={18} color="black" /> Vive en 
-          <Text style={styles.textBold}> {usersFriendsList?.location} </Text>
-        </Text>
-        <TouchableOpacity style={{alignContent:'center', alignItems: 'center', flexDirection:'row'}}>
-          <SimpleLineIcons name="options" size={18} color="black" style={{marginRight:5}}/>
-          <Text >
-            Ver la información de {usersFriendsList?.name}
-          </Text>
-        </TouchableOpacity>
-
-        <View style={styles.contentListFriends}>
-          <Text style={styles.titleContentDetails}>Amigos</Text>
-          <Text style={styles.titleContentDetails}>{usersFriendsList?.friendsList.length} ( 3 en común)</Text>
-          
-          <View style={styles.contentCardFriends}>
-            {usersFriendsList?.friendsList.slice(0, 6).map(item => (
-              <CardDetailsFriends 
-                key={item?.id} 
-                {...item} 
-                navigation={navigation}
-              />
-            ))}
+        <View style={styles.contentInfoUser}>
+          <Text style={styles.textName}>{`${userProfileById?.name} ${userProfileById?.lastName}`}</Text>
+          <View style={styles.contentInfoFriendsCommon}>
+            <Text> <Text style={styles.textBold}>4</Text> amigos en común</Text>
           </View>
-        
+          <View style={styles.contentButtons}>
+            <TouchableOpacity style={styles.buttonAdd}>
+              {userProfileById?.isFriend ?
+                <>
+                  <Ionicons name="person" size={18} color="#ffffff" />
+                  <Text style={styles.buttonTextAdd}>Amigo</Text>
+                </>
+                :
+                <>
+                  <Ionicons name="person-add" size={18} color="#ffffff" />
+                  <Text style={styles.buttonTextAdd}>Añadir amigo</Text>
+                </>
+              }
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonMessage}>
+              <MaterialCommunityIcons name="facebook-messenger" size={18} color="black" />
+              <Text style={styles.buttonTextMessage}>Enviar mensaje</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.contentDetails}>
+          <Text style={styles.titleContentDetails}>Detalles</Text>
+          <Text style={styles.textContentDEtails}>
+            <FontAwesome name="home" size={18} color="black" /> Vive en 
+            <Text style={styles.textBold}> {userProfileById?.location} </Text>
+          </Text>
+          <TouchableOpacity style={{alignContent:'center', alignItems: 'center', flexDirection:'row'}}>
+            <SimpleLineIcons name="options" size={18} color="black" style={{marginRight:5}}/>
+            <Text >
+              Ver la información de {userProfileById?.name}
+            </Text>
+          </TouchableOpacity>
+
+          <View style={styles.contentListFriends}>
+            <Text style={styles.titleContentDetails}>Amigos</Text>
+            <Text style={styles.titleContentDetails}>{userProfileById?.friendsList.length} ( 3 en común)</Text>
+            
+            <View style={styles.contentCardFriends}>
+              {userProfileById?.friendsList.slice(0, 6).map(item => (
+                <CardDetailsFriends 
+                  key={item?.id} 
+                  {...item} 
+                  navigation={navigation}
+                />
+              ))}
+            </View>
+          
+          </View>
+
+          <TouchableOpacity style={styles.buttonBack}>
+          <Text style={styles.textButtonBack}>Ver todos los amigos</Text>
+        </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.buttonBack}>
-        <Text style={styles.textButtonBack}>Ver todos los amigos</Text>
-      </TouchableOpacity>
-      </View>
+        {userPosts?.map( item => (
+          <CardPublication {...item} key={item.idPublication} navigation={navigation}/>
+        ))}
 
-      {userPosts?.map( item => (
-        <CardPublication {...item} key={item.idPublication} navigation={navigation}/>
-      ))}
-
-      <TextEndPublications/>
+        <TextEndPublications/>
+      </>  
+      :
+      <>
+      </>  
+    }
     </ScrollView>
   )
 }
