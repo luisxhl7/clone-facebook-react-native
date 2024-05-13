@@ -1,46 +1,50 @@
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { usuariosFacebook } from '../../../data/dataUsers'
+import { useDispatch, useSelector,  } from 'react-redux'
+import { Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
+import { isLoading } from '../../../store/slices/profileUsersSlice'
 
-const user = usuariosFacebook[0]
+export default CardFriend = ({ id, navigation, profilePicture, name, isFriend, friendsList }) => {
+    const { user } = useSelector( (state) => state.auth);
+    const [commonFriends, setCommonFriends] = useState(null)
+    const dispatch = useDispatch()
 
-export default CardFriend = ({id, name, friendsList, profilePicture}) => {
-    const [friendsInCommon, setFriendsInCommon] = useState(null)
-    
-    const countFriendsInCommon = () => {
-        const userFriendsList = user.friendsList?.map(friend => friend.id);
-        const friendsListOtherUser = friendsList?.map(friend => friend.id);
-
-        const commonFriends = userFriendsList?.filter(id => friendsListOtherUser.includes(id));
-        setFriendsInCommon(commonFriends.length)
+    const redirectProfileUser = () => {
+        dispatch(isLoading({state: true}))
+        navigation.push('profileUser', {idUser: id})
     }
-    
+
     useEffect(() => {
-        countFriendsInCommon()
+        const friendsList1 = friendsList.map(friend => friend.id);
+        const friendsList2 = user.friendsList.map(friend => friend.id);
+
+        const commonFriendsCount = friendsList1.filter(friendId => friendsList2.includes(friendId)).length;
+
+        setCommonFriends(commonFriendsCount)
     }, [id])
     
+
     return (
-        <View style={styles.cardFriend}>
-            <Image
-                style={styles.image}
-                source={profilePicture}
-            />
+        <View style={styles.cardFriend} >
+            <TouchableHighlight onPress={redirectProfileUser} underlayColor="transparent">
+                <Image
+                    style={styles.image}
+                    source={profilePicture}
+                />
+            </TouchableHighlight>
             <View style={styles.contentInfo}>
-                <View style={styles.contentName}>
-                    <Text style={styles.textName}>{name}</Text>
-                    <Text style={styles.textOpacity}>9 sem</Text>
-                </View>
-                <View style={styles.textFriend}>
-                    <Text style={styles.textOpacity}>{friendsInCommon} amigos en común</Text>
-                </View>
-                <View style={styles.contentButtons}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.textButton}>Confirmar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonDelete}>
-                        <Text style={styles.textButtonBlack}>Eliminar</Text>
-                    </TouchableOpacity>
-                </View>
+                <TouchableHighlight style={styles.contentName} underlayColor="transparent" onPress={redirectProfileUser}>
+                    <>
+                        <Text style={styles.textName}>{name}</Text>
+                        <Text style={styles.textOpacity}>{commonFriends} amigos en común</Text>
+                    </>
+                </TouchableHighlight>
+                {!isFriend &&
+                    <View style={styles.contentButtons}>
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.textButton}>Añadir</Text>
+                        </TouchableOpacity>
+                    </View>
+                }
             </View>
         </View>
     )
@@ -49,11 +53,13 @@ export default CardFriend = ({id, name, friendsList, profilePicture}) => {
 const styles = StyleSheet.create({
     cardFriend:{
         flexDirection: 'row',
-        paddingHorizontal: 10,
-        paddingVertical: 4,
+        paddingVertical: 7,
     },
     contentInfo:{
         flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start'
     },
     image:{
         width: 85,
@@ -61,19 +67,11 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         marginRight: 15
     },
-    contentName:{
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
     textName:{
         fontWeight: 'bold'
     },
     textOpacity:{
         color: '#65676B'
-    },
-    textFriend:{
-        flexDirection: 'row',
-        marginVertical: 3
     },
     contentButtons:{
         flexDirection: 'row',
@@ -81,10 +79,9 @@ const styles = StyleSheet.create({
         gap: 10
     },
     button:{
-        flex: 1,
         backgroundColor: '#0866ff',
         justifyContent: 'center',
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 7
     },
@@ -93,14 +90,4 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '600'
     },
-    textButtonBlack:{
-        textAlign: 'center',
-        fontWeight: '600'
-    },
-    buttonDelete:{
-        flex: 1,
-        backgroundColor: '#E4E6EB',
-        justifyContent: 'center',
-        borderRadius: 7
-    }
 })

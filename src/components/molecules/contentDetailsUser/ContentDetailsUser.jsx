@@ -35,7 +35,7 @@ export default ContentDetailsUser = ({ location, name, friendsList, navigation, 
         </View>
       </View>
 
-      <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.push('friends', {idUser: idUser})}>
+      <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.navigate('friends', {idUser: idUser, name: name})}>
         <Text style={styles.textButtonBack}>Ver todos los amigos</Text>
       </TouchableOpacity>
     </View>

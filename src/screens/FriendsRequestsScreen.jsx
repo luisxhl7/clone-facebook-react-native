@@ -7,7 +7,7 @@ import CardFriend from '../components/molecules/cardFriend/CardFriend';
 export default FriendsRequestsScreen = () => {
   const { user } = useSelector( (state) => state.auth);
   const { profileUsers } = useSelector( (state) => state.profileUsers);
-
+  
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.contentSearch}>
@@ -32,11 +32,11 @@ export default FriendsRequestsScreen = () => {
         </TouchableOpacity>
       </View>
       <View>
-        {profileUsers?.map( item =>
+        {/* {profileUsers?.map( item =>
           user.id !== item.id && (
             <CardFriend key={item.id} {...item}/>
           )
-        )}
+        )} */}
       </View>
     </ScrollView>
   )

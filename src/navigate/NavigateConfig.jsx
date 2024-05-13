@@ -29,7 +29,11 @@ const NavigateConfig = () => {
                 :
                 <>
                     <Stack.Screen name="tabs" component={TabsTopNavigator} options={{ headerShown: false }}/>
-                    <Stack.Screen name="friends" component={FriendsScreen} />
+                    <Stack.Screen name="friends" component={FriendsScreen} 
+                        options={({ route }) => ({
+                            title: route.params.name
+                        })}
+                    />
                     <Stack.Screen name="profileUser" component={ProfileUserScreen} 
                         options={{
                             animation: 'slide_from_right',

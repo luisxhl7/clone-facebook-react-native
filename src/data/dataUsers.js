@@ -44,14 +44,6 @@ export const usuariosFacebook = [
         name: 'Pedro José'
       },
       {
-        id: '3456789012',
-        name: 'Juan Pablo',
-      },
-      {
-        id: '4567890123',
-        name: 'Ana María',
-      },
-      {
         id: '6789012345',
         name: 'María José',
       },
@@ -60,8 +52,16 @@ export const usuariosFacebook = [
         name: 'Juan Carlos',
       },
       {
+        id: '3456789012',
+        name: 'Juan Pablo',
+      },
+      {
         id: '8901234567',
         name: 'Fernanda',
+      },
+      {
+        id: '4567890123',
+        name: 'Ana María',
       },
       {
         id: '9012345678',
@@ -84,16 +84,16 @@ export const usuariosFacebook = [
     location: 'España, Madrid',
     friendsList: [
       {
-        id: '2345678901',
-        name: 'María Fernanda'
-      },
-      {
         id: '4567890123',
         name: 'Ana María'
       },
       {
         id: '5678901234',
         name: 'Pedro José'
+      },
+      {
+        id: '8901234567',
+        name: 'Fernanda',
       }
     ],
   },
@@ -204,6 +204,10 @@ export const usuariosFacebook = [
     gender: 'femenino',
     location: 'Ecuador, Quito',
     friendsList: [
+      {
+        id: '3456789012',
+        name: 'Juan Pablo',
+      }
     ],
   },
   {

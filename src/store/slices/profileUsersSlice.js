@@ -5,7 +5,8 @@ const initialState = {
     isLoading: true, //true - false
     profileUsers: usuariosFacebook,
     userProfileById: null,
-    userPosts: null
+    userPosts: null,
+    profileFriendsList: null
 };
 
 export const profileUsersSlice = createSlice({
@@ -21,13 +22,23 @@ export const profileUsersSlice = createSlice({
         filterUserPostById: (state, action) => {
             state.userPosts = action.payload.userPosts;
         },
+        filterProfileFriendsList: (state, action) => {
+            state.profileFriendsList = action.payload.profileFriendsList;
+        },
         clearProfileUserData: (state) => {
             state.userProfileById = null;
             state.userPosts = null;
+            state.profileFriendsList = null;
         },
     }
 });
   
-export const { isLoading, filterUserById, filterUserPostById, clearProfileUserData } = profileUsersSlice.actions;
+export const { 
+    isLoading, 
+    filterUserById, 
+    filterUserPostById, 
+    clearProfileUserData,
+    filterProfileFriendsList 
+} = profileUsersSlice.actions;
 
 export default profileUsersSlice.reducer;
