@@ -12,10 +12,13 @@ export default FriendsScreen = ({ route, navigation }) => {
 
     useFocusEffect(
         useCallback(() => {
-          dispatch( getFriendsUser_thunks())
-          dispatch( getProfileUser_thunks(idUser))
+            dispatch(getProfileUser_thunks(idUser))
+            .then(() => {
+                dispatch(getFriendsUser_thunks());
+            })
         }, [idUser])
     );
+    
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>

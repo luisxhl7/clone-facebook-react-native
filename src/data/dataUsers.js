@@ -139,10 +139,6 @@ export const usuariosFacebook = [
       {
         id: '4567890123',
         name: 'Ana María'
-      },
-      {
-        id: '5678901234',
-        name: 'Pedro José'
       }
     ],
   },

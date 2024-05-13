@@ -2,8 +2,20 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import CardDetailsFriends from '../cardDetailsFriends/CardDetailsFriends'
 import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
+import { isLoading } from '../../../store/slices/profileUsersSlice';
+import { useDispatch } from 'react-redux';
 
 export default ContentDetailsUser = ({ location, name, friendsList, navigation, idUser }) => {
+  const dispatch = useDispatch()
+  
+  const handleRedirect = () => {
+    dispatch(isLoading({state: true}))
+    navigation.push('friends', {
+      idUser: idUser, 
+      name: name
+    })
+}
+  
   return (
     <View style={styles.contentDetails}>
       <Text style={styles.titleContentDetails}>Detalles</Text>
@@ -35,7 +47,7 @@ export default ContentDetailsUser = ({ location, name, friendsList, navigation, 
         </View>
       </View>
 
-      <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.navigate('friends', {idUser: idUser, name: name})}>
+      <TouchableOpacity style={styles.buttonBack} onPress={handleRedirect}>
         <Text style={styles.textButtonBack}>Ver todos los amigos</Text>
       </TouchableOpacity>
     </View>
