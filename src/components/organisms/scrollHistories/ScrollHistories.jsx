@@ -4,13 +4,13 @@ import CardNewHistory from "../../molecules/cardNewHistory/CardNewHistory";
 import CardHistory from '../../molecules/cardHistory/CardHistory';
 import { dataHistories } from '../../../data/dataHistories';
 
-export default ScrollHistories = () => {
+export default ScrollHistories = ({navigation}) => {
     return (
         <ScrollView horizontal style={ styles.scroll } showsHorizontalScrollIndicator={false}>
             <View style={styles.content}>
                 <CardNewHistory/>
                 {dataHistories.map( item => (
-                    <CardHistory key={item.idUser} {...item}/>
+                    <CardHistory key={item.idUser} {...item} navigation={navigation}/>
                 ))}
             </View>
         </ScrollView>

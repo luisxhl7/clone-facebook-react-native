@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
 
-export default CardHistory = ({idUser, histories}) => {
+export default CardHistory = ({idUser, histories, navigation}) => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -10,20 +10,28 @@ export default CardHistory = ({idUser, histories}) => {
     setUser(result)
   }, [idUser])
 
+  const handleRedirect = () => {
+    navigation.push('history', {
+      idUser: idUser
+    })
+  }
+
   return (
-    <View style={styles.cardHistory}>
-      <View style={styles.contentImageUser}>
+    <TouchableHighlight onPress={handleRedirect}>
+      <View style={styles.cardHistory}>
+        <View style={styles.contentImageUser}>
+          <Image
+            style={styles.imageUser}
+            source={user?.profilePicture}
+          />
+        </View>
         <Image
-          style={styles.imageUser}
-          source={user?.profilePicture}
+          style={styles.history}
+          source={histories[0].history}
         />
+        <Text style={styles.text}>{user?.name}</Text>
       </View>
-      <Image
-        style={styles.history}
-        source={histories[0].history}
-      />
-      <Text style={styles.text}>{user?.name}</Text>
-    </View>
+    </TouchableHighlight >
   )
 }
 
