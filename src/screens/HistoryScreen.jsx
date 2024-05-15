@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { BackHandler, Image, ImageBackground, PanResponder, StyleSheet, Text, TextInput, View } from 'react-native'
+import { BackHandler, Image, ImageBackground, PanResponder, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native'
 import Constants from 'expo-constants'
 import { dataHistories } from '../data/dataHistories';
 import { getProfileUser_thunks } from '../store/thunks/profileUserThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
+import { reactionsImage } from '../../assets/images/reactions';
 
 export default HistoryScreen = ({navigation, route}) => {
     const dispatch = useDispatch()
     const { idUser } = route.params;
     const { userProfileById } = useSelector(state => state.profileUsers)
     const [history, setHistory] = useState(null)
-    const [text, setText] = useState('');
 
     const [gestureDetected, setGestureDetected] = useState(false);
 
@@ -89,7 +89,7 @@ export default HistoryScreen = ({navigation, route}) => {
     };
 
     return (
-        <View style={styles.historyScreen} {...panResponder.panHandlers}>
+        <View style={styles.historyScreen} >
             
             <View style={styles.infoUser}>
                 <View style={styles.lineTime}></View>
@@ -106,31 +106,65 @@ export default HistoryScreen = ({navigation, route}) => {
                 </View>
             </View>
             
-            <ImageBackground 
-                style={styles.contentImage}
-                source={history?.histories[0]?.history} 
-            >
-                <Image
+            <View style={styles.contentImage} {...panResponder.panHandlers}>
+                <ImageBackground 
                     source={history?.histories[0]?.history}
-                    style={styles.image}
-                    resizeMode="center"
-                />
-            </ImageBackground>
-
-            <View style={styles.contentReactions}>
-                <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 10, paddingHorizontal: 10 }}
-                    onChangeText={text => setText(text)}
-                    value={text}
-                    placeholder="Escribe aquí"
-                />
-                <Image
-                    source={userProfileById?.profilePicture}
-                    resizeMode="cover"
-                    style={styles.imageUser}
-                />
+                    blurRadius={100}
+                >
+                    <Image
+                        source={history?.histories[0]?.history}
+                        style={styles.image}
+                        resizeMode="contain"
+                    />
+                </ImageBackground>
             </View>
-        
+
+            <View>
+                <ScrollView 
+                    horizontal 
+                    contentContainerStyle={styles.contentReactions} 
+                    showsHorizontalScrollIndicator={false}
+                >
+                    <TouchableHighlight underlayColor="transparent" style={styles.button}>
+                        <Text style={styles.textButton}>Envía un mensaje...</Text>
+                    </TouchableHighlight>
+                    <Image
+                        source={reactionsImage.love}
+                        style={styles.iconReaction}
+                        resizeMode="cover"
+                    />
+                    <Image
+                        source={reactionsImage.like}
+                        style={styles.iconReaction}
+                        resizeMode="cover"
+                    />
+                    <Image
+                        source={reactionsImage.amuses}
+                        style={styles.iconReaction}
+                        resizeMode="cover"
+                    />
+                    <Image
+                        source={reactionsImage.matters}
+                        style={styles.iconReaction}
+                        resizeMode="cover"
+                    />
+                    <Image
+                        source={reactionsImage.surprise}
+                        style={styles.iconReaction}
+                        resizeMode="cover"
+                    />
+                    <Image
+                        source={reactionsImage.sad}
+                        style={styles.iconReaction}
+                        resizeMode="cover"
+                    />
+                    <Image
+                        source={reactionsImage.anger}
+                        style={styles.iconReaction}
+                        resizeMode="cover"
+                    />
+                </ScrollView>
+            </View>
         </View>
     )
 }
@@ -138,26 +172,13 @@ export default HistoryScreen = ({navigation, route}) => {
 const styles = StyleSheet.create({
     historyScreen:{
         paddingTop: Constants.statusBarHeight + 10,
-        position: 'relative'
+        position: 'relative',
+        flex: 1
     },
     lineTime:{
         borderWidth: 1,
-        marginBottom: 10
-    },
-    contentImage:{
-        width: '100%',
-        overflow: 'hidden',
-        alignContent: 'center',
-        justifyContent: 'center',
-    },
-    image: {
-        width: '100%',
-        height: '90%',
-    },
-    text:{
-        fontSize: 17,
-        fontWeight: '700',
-        color: '#ffffff'
+        marginBottom: 10,
+        borderColor: '#ffffff'
     },
     infoUser:{
         position: 'absolute',
@@ -172,20 +193,54 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    contentName:{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        flex: 1
-    },
     imageUser:{
         width: 40,
         height: 40,
         borderRadius: 50,
         marginRight: 10,
     },
-    contentReactions:{
+    contentName:{
         flexDirection: 'row',
-        alignItems: 'center'
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        flex: 1
+    },
+    text:{
+        fontSize: 17,
+        fontWeight: '700',
+        color: '#ffffff'
+    },
+
+    contentImage:{
+        flex: 1,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+    },
+
+    contentReactions:{
+        flexDirection:'row',
+        backgroundColor: '#000000',
+        alignItems: 'center',
+        height: 75,
+    },
+    button:{
+        height: 40,
+        width: 230,
+        borderRadius: 25,
+        borderColor: '#afafaf',
+        borderWidth: 1,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        marginHorizontal: 10,
+    },
+    textButton:{
+        color: '#595b5f'
+    },
+    iconReaction:{
+        marginHorizontal: 4,
+        height: 40,
+        width: 40,
     }
 })

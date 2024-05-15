@@ -17,7 +17,7 @@ export default CardHistory = ({idUser, histories, navigation}) => {
   }
 
   return (
-    <TouchableHighlight onPress={handleRedirect}>
+    <TouchableHighlight onPress={handleRedirect} underlayColor="transparent">
       <View style={styles.cardHistory}>
         <View style={styles.contentImageUser}>
           <Image
