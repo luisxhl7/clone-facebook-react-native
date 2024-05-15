@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { BackHandler, Image, PanResponder, StyleSheet, Text, View } from 'react-native'
+import { BackHandler, Image, ImageBackground, PanResponder, StyleSheet, Text, TextInput, View } from 'react-native'
 import Constants from 'expo-constants'
 import { dataHistories } from '../data/dataHistories';
 import { getProfileUser_thunks } from '../store/thunks/profileUserThunks';
 import { useDispatch, useSelector } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
 
 export default HistoryScreen = ({navigation, route}) => {
     const dispatch = useDispatch()
     const { idUser } = route.params;
     const { userProfileById } = useSelector(state => state.profileUsers)
     const [history, setHistory] = useState(null)
+    const [text, setText] = useState('');
 
     const [gestureDetected, setGestureDetected] = useState(false);
 
@@ -88,26 +90,47 @@ export default HistoryScreen = ({navigation, route}) => {
 
     return (
         <View style={styles.historyScreen} {...panResponder.panHandlers}>
+            
             <View style={styles.infoUser}>
+                <View style={styles.lineTime}></View>
                 <View style={styles.contentImageUser}>
                     <Image
                         source={userProfileById?.profilePicture}
                         resizeMode="cover"
                         style={styles.imageUser}
                     />
+                    <View style={styles.contentName}>
+                        <Text style={styles.text}>{userProfileById?.name}</Text>
+                        <AntDesign name="close" size={24} color="black" onPress={() => navigation.navigate('home')}/>
+                    </View>
                 </View>
-                <Text style={styles.text}>{userProfileById?.name}</Text>
             </View>
-            <View style={styles.contentImage}>
+            
+            <ImageBackground 
+                style={styles.contentImage}
+                source={history?.histories[0]?.history} 
+            >
                 <Image
                     source={history?.histories[0]?.history}
                     style={styles.image}
+                    resizeMode="center"
+                />
+            </ImageBackground>
+
+            <View style={styles.contentReactions}>
+                <TextInput
+                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 10, paddingHorizontal: 10 }}
+                    onChangeText={text => setText(text)}
+                    value={text}
+                    placeholder="Escribe aquí"
+                />
+                <Image
+                    source={userProfileById?.profilePicture}
                     resizeMode="cover"
+                    style={styles.imageUser}
                 />
             </View>
-            <View>
-                <Text>{idUser}</Text>
-            </View>
+        
         </View>
     )
 }
@@ -117,36 +140,52 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight + 10,
         position: 'relative'
     },
+    lineTime:{
+        borderWidth: 1,
+        marginBottom: 10
+    },
     contentImage:{
         width: '100%',
         overflow: 'hidden',
-        height: 700,
+        alignContent: 'center',
+        justifyContent: 'center',
     },
     image: {
-        flex: 1,
         width: '100%',
-        height: '100%',
+        height: '90%',
     },
     text:{
         fontSize: 17,
-        fontWeight: '500'
+        fontWeight: '700',
+        color: '#ffffff'
     },
     infoUser:{
         position: 'absolute',
         top: Constants.statusBarHeight + 10,
         zIndex: 99,
-        flexDirection: 'row',
         width: '100%',
         paddingTop: 10,
         paddingHorizontal: 10
     },
     contentImageUser:{
         borderRadius: 50,
-        marginRight: 10
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    contentName:{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        flex: 1
     },
     imageUser:{
         width: 40,
         height: 40,
         borderRadius: 50,
+        marginRight: 10,
+    },
+    contentReactions:{
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })
