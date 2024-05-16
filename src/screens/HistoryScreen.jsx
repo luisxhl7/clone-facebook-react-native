@@ -1,39 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { BackHandler, Image, ImageBackground, PanResponder, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native'
+import { BackHandler, Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native'
 import Constants from 'expo-constants'
 import { dataHistories } from '../data/dataHistories';
 import { getProfileUser_thunks } from '../store/thunks/profileUserThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { reactionsImage } from '../../assets/images/reactions';
+import CountDownBar from '../components/atoms/countDownBar/CountDownBar';
 
 export default HistoryScreen = ({navigation, route}) => {
     const dispatch = useDispatch()
     const { idUser } = route.params;
     const { userProfileById } = useSelector(state => state.profileUsers)
-    const [history, setHistory] = useState(null)
-
-    const [gestureDetected, setGestureDetected] = useState(false);
-
-    const panResponder = useRef(
-      PanResponder.create({
-        onStartShouldSetPanResponder: () => !gestureDetected,
-        onPanResponderMove: (event, gestureState) => {
-          if (!gestureDetected) {
-            const { dx } = gestureState;
-            const swipeThreshold = 50;
-  
-            if (dx > swipeThreshold) {
-              handleBackRedirect();
-              setGestureDetected(true);
-            } else if (dx < -swipeThreshold) {
-              handleNextRedirect();
-              setGestureDetected(true);
-            }
-          }
-        },
-      })
-    ).current;
+    const [ history, setHistory ] = useState(null)
+    const [ progress, setProgress ] = useState(1);
+    const timerRef = useRef(null);
 
     useEffect(() => {
         const backAction = () => {
@@ -45,9 +26,11 @@ export default HistoryScreen = ({navigation, route}) => {
     }, []);
 
     useEffect(() => {
+        stopCountdown();
         const history = dataHistories.filter( item => item.idUser === idUser)[0]
         setHistory(history)
         dispatch(getProfileUser_thunks(idUser))
+        countdown()
     }, [idUser])
     
     const handleNextRedirect = () => {
@@ -88,11 +71,43 @@ export default HistoryScreen = ({navigation, route}) => {
         }
     };
 
+    const handleInputFocus = () => {
+        // Realiza la acción que desees al seleccionar el TextInput
+        console.log('Mensaje', 'El input ha sido seleccionado');
+    };
+
+    const countdown = () => {
+        const totalTime = 10000;
+        let startTime = Date.now();
+
+        timerRef.current = setInterval(() => {
+            let elapsedTime = Date.now() - startTime;
+            let newTime = totalTime - elapsedTime;
+            console.log(timerRef.current);
+            if (newTime <= 0) {
+                clearInterval(timerRef.current);
+                console.log('Timer finished!');
+                handleNextRedirect();
+            }
+
+            const newProgress = newTime / totalTime;
+            setProgress(newProgress >= 0 ? newProgress : 0);
+        }, 100);
+    };
+
+    const stopCountdown = () => {
+        if (timerRef.current) {
+            console.log('limpiando');
+            clearInterval(timerRef.current); // Limpiar el temporizador actual
+            timerRef.current = null; // Reiniciar la referencia
+        }
+    };
+
     return (
-        <View style={styles.historyScreen} >
+        <View style={styles.historyScreen}>
             
             <View style={styles.infoUser}>
-                <View style={styles.lineTime}></View>
+                <CountDownBar progress={progress}/>
                 <View style={styles.contentImageUser}>
                     <Image
                         source={userProfileById?.profilePicture}
@@ -106,7 +121,7 @@ export default HistoryScreen = ({navigation, route}) => {
                 </View>
             </View>
             
-            <View style={styles.contentImage} {...panResponder.panHandlers}>
+            <View style={styles.contentImage}>
                 <ImageBackground 
                     source={history?.histories[0]?.history}
                     blurRadius={100}
@@ -116,6 +131,12 @@ export default HistoryScreen = ({navigation, route}) => {
                         style={styles.image}
                         resizeMode="contain"
                     />
+                    <TouchableHighlight style={styles.buttonGhostLeft} onPress={() => handleBackRedirect()} underlayColor="transparent">
+                        <Text></Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={styles.buttonGhostRight} onPress={() => handleNextRedirect()} underlayColor="transparent">
+                        <Text></Text>
+                    </TouchableHighlight>
                 </ImageBackground>
             </View>
 
@@ -125,9 +146,13 @@ export default HistoryScreen = ({navigation, route}) => {
                     contentContainerStyle={styles.contentReactions} 
                     showsHorizontalScrollIndicator={false}
                 >
-                    <TouchableHighlight underlayColor="transparent" style={styles.button}>
-                        <Text style={styles.textButton}>Envía un mensaje...</Text>
-                    </TouchableHighlight>
+                    <TextInput 
+                        underlayColor="transparent" 
+                        style={styles.button}
+                        placeholder='Envía un mensaje...'
+                        placeholderTextColor='#ffffff'
+                        onFocus={handleInputFocus}
+                    />
                     <Image
                         source={reactionsImage.love}
                         style={styles.iconReaction}
@@ -175,11 +200,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         flex: 1
     },
-    lineTime:{
-        borderWidth: 1,
-        marginBottom: 10,
-        borderColor: '#ffffff'
-    },
     infoUser:{
         position: 'absolute',
         top: Constants.statusBarHeight + 10,
@@ -213,6 +233,19 @@ const styles = StyleSheet.create({
 
     contentImage:{
         flex: 1,
+        position: 'relative'
+    },
+    buttonGhostLeft:{
+        position: 'absolute',
+        height: '100%',
+        width: '50%',
+        left: 0
+    },
+    buttonGhostRight:{
+        position: 'absolute',
+        height: '100%',
+        width: '50%',
+        right: 0
     },
     image: {
         width: '100%',
@@ -229,14 +262,16 @@ const styles = StyleSheet.create({
         height: 40,
         width: 230,
         borderRadius: 25,
-        borderColor: '#afafaf',
+        borderColor: '#2f3130',
         borderWidth: 1,
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         paddingVertical: 10,
         marginHorizontal: 10,
+        backgroundColor: '#2f3130'
+
     },
     textButton:{
-        color: '#595b5f'
+        color: '#595b5f',
     },
     iconReaction:{
         marginHorizontal: 4,
