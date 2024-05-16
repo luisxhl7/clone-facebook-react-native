@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { reactionsImage } from '../../assets/images/reactions';
 import CountDownBar from '../components/atoms/countDownBar/CountDownBar';
+import { isLoading } from '../store/slices/profileUsersSlice';
 
 export default HistoryScreen = ({navigation, route}) => {
     const dispatch = useDispatch()
@@ -18,8 +19,9 @@ export default HistoryScreen = ({navigation, route}) => {
 
     useEffect(() => {
         const backAction = () => {
-          navigation.navigate('home');
-          return true;
+            stopCountdown()
+            navigation.navigate('home');
+            return true;
         };
         BackHandler.addEventListener('hardwareBackPress', backAction);
         return () => BackHandler.removeEventListener('hardwareBackPress', backAction);
@@ -35,6 +37,7 @@ export default HistoryScreen = ({navigation, route}) => {
     
     const handleNextRedirect = () => {
         const currentIndex = dataHistories.findIndex(item => item.idUser === idUser)
+        stopCountdown()
 
         if (currentIndex !== -1) {
             const nextIndex = currentIndex + 1;
@@ -54,6 +57,7 @@ export default HistoryScreen = ({navigation, route}) => {
 
     const handleBackRedirect = () => {
         const currentIndex = dataHistories.findIndex(item => item.idUser === idUser);
+        stopCountdown()
     
         if (currentIndex !== -1) {
             const nextIndex = currentIndex - 1;
@@ -71,8 +75,15 @@ export default HistoryScreen = ({navigation, route}) => {
         }
     };
 
+    const handleRedirectProfileUser = () => {
+        stopCountdown()
+        dispatch(isLoading({state: true}))
+        navigation.push('profileUser', {
+            idUser: idUser
+        })
+    }
+
     const handleInputFocus = () => {
-        // Realiza la acción que desees al seleccionar el TextInput
         console.log('Mensaje', 'El input ha sido seleccionado');
     };
 
@@ -83,10 +94,8 @@ export default HistoryScreen = ({navigation, route}) => {
         timerRef.current = setInterval(() => {
             let elapsedTime = Date.now() - startTime;
             let newTime = totalTime - elapsedTime;
-            console.log(timerRef.current);
             if (newTime <= 0) {
                 clearInterval(timerRef.current);
-                console.log('Timer finished!');
                 handleNextRedirect();
             }
 
@@ -97,9 +106,8 @@ export default HistoryScreen = ({navigation, route}) => {
 
     const stopCountdown = () => {
         if (timerRef.current) {
-            console.log('limpiando');
-            clearInterval(timerRef.current); // Limpiar el temporizador actual
-            timerRef.current = null; // Reiniciar la referencia
+            clearInterval(timerRef.current);
+            timerRef.current = null;
         }
     };
 
@@ -108,17 +116,23 @@ export default HistoryScreen = ({navigation, route}) => {
             
             <View style={styles.infoUser}>
                 <CountDownBar progress={progress}/>
-                <View style={styles.contentImageUser}>
-                    <Image
-                        source={userProfileById?.profilePicture}
-                        resizeMode="cover"
-                        style={styles.imageUser}
-                    />
-                    <View style={styles.contentName}>
-                        <Text style={styles.text}>{userProfileById?.name}</Text>
-                        <AntDesign name="close" size={24} color="black" onPress={() => navigation.navigate('home')}/>
-                    </View>
-                </View>
+                <TouchableHighlight 
+                    underlayColor="transparent"
+                    style={styles.contentImageUser} 
+                    onPress={handleRedirectProfileUser}
+                >
+                    <>
+                        <Image
+                            source={userProfileById?.profilePicture}
+                            resizeMode="cover"
+                            style={styles.imageUser}
+                        />
+                        <View style={styles.contentName}>
+                            <Text style={styles.text}>{userProfileById?.name}</Text>
+                            <AntDesign name="close" size={24} color="black" onPress={() => navigation.navigate('home')}/>
+                        </View>
+                    </>
+                </TouchableHighlight>
             </View>
             
             <View style={styles.contentImage}>
