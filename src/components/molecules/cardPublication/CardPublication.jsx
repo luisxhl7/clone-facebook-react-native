@@ -5,41 +5,66 @@ import {Foundation } from '@expo/vector-icons';
 import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
 import { useDispatch } from 'react-redux';
 import { isLoading } from '../../../store/slices/profileUsersSlice';
+import { dataHistories } from '../../../data/dataHistories';
 
 export default CardPublication = ({image, idUser, datePublication, description, reactions ,comments, navigation}) => {
     const dispatch = useDispatch()
     const [user, setUser] = useState(null)
+    const [history, setHistory] = useState(false)
+
+    const imageUserStyle = [
+        styles.contentImageUser,
+        history && styles.historyActive
+    ]
 
     useEffect(() => {
         const result = usuariosFacebook.filter((user) => user.id === idUser)[0];
+        const haveHistory = dataHistories.some((history) => history.idUser === idUser);
+        setHistory(haveHistory)
         setUser(result)
     }, [idUser])
     
-    const handleRedirect = () => {
+    const handleRedirectProfileUser = () => {
         dispatch(isLoading({state: true}))
         navigation.push('profileUser', {
             idUser: idUser
         })
     }
 
+    const handleRedirectHistoriesUser = () => {
+        dispatch(isLoading({state: true}))
+        navigation.push('history', {
+            idUser: idUser
+        })
+    }
+
+
+
     return (
         <View style={styles.cardPublication}>
-            <TouchableHighlight 
+            <View 
                 style={styles.info} 
-                underlayColor="transparent"
-                onPress={handleRedirect}
             >
-                <>
+                <TouchableHighlight 
+                    underlayColor="transparent"
+                    onPress={history ? handleRedirectHistoriesUser : handleRedirectProfileUser} 
+                    style={imageUserStyle}
+                >
                     <Image
                         style={styles.imageUser}
                         source={user?.profilePicture}
                     />
-                    <View>
+                </TouchableHighlight>
+                <View>
+                    <TouchableHighlight
+                        underlayColor="transparent"
+                        onPress={handleRedirectProfileUser} 
+                    >
                         <Text>{user?.name}</Text>
-                        <Text style={styles.textDate}>{datePublication}</Text>
-                    </View>
-                </>
-            </TouchableHighlight>
+                    </TouchableHighlight>
+                    <Text style={styles.textDate}>{datePublication}</Text>
+                </View>
+            </View>
 
             <View style={styles.contentDescription}>
                 <Text style={styles.textDescription}>{description}</Text>
@@ -86,7 +111,15 @@ const styles = StyleSheet.create({
         width: 35,
         height: 35,
         borderRadius: 50,
-        marginRight: 7
+    },
+    contentImageUser:{
+        borderRadius: 50,
+        marginRight: 7,
+        padding: 2
+    },
+    historyActive:{
+        borderColor: '#0866ff',
+        borderWidth: 3,
     },
     textDate:{
         fontSize: 11,
