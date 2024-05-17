@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { AntDesign, EvilIcons, Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 
-export default ContentButtonsPublication = ({navigation}) => {
+export default ContentButtonsPublication = ({navigation, idPublication}) => {
     const [isLike, setIsLike] = useState(false);
     const [sound, setSound] = useState();
 
@@ -18,7 +18,9 @@ export default ContentButtonsPublication = ({navigation}) => {
     }
 
     const handleRedirect = () => {
-        navigation.push('commentspublication')
+        navigation.push('commentspublication',{
+            idPublication: idPublication
+        })
     }
 
     useEffect(() => {

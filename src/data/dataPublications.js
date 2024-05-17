@@ -9,7 +9,10 @@ export const dataPublications = [
     datePublication: 'enero',
     reactions: [],
     comments: [
-      'hola',
+      {
+        idUser: '4567890123',
+        comment:'hola',
+      },
     ],
   },
   {
@@ -30,10 +33,10 @@ export const dataPublications = [
     datePublication: 'enero',
     reactions: [12322,123123,123123,53453,1123,123123],
     comments: [
-      'hola',
-      'hola',
-      'hola',
-      'hola',
+      {
+        idUser: '4567890123',
+        comment:'hola',
+      },
     ],
   },
   {
@@ -54,9 +57,10 @@ export const dataPublications = [
     datePublication: 'enero',
     reactions: [12322,123123,123123,53453,1123,123123],
     comments: [
-      'hola',
-      'hola',
-      'hola',
+      {
+        idUser: '4567890123',
+        comment:'hola',
+      },
     ],
   },
   {
@@ -67,11 +71,10 @@ export const dataPublications = [
     datePublication: 'enero',
     reactions: [12322,123123,123123,53453,1123,123123],
     comments: [
-      'hola',
-      'hola',
-      'hola',
-      'hola',
-      'hola',
+      {
+        idUser: '4567890123',
+        comment:'hola',
+      },
     ],
   },
 ];

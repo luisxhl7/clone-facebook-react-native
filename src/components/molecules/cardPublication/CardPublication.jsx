@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { isLoading } from '../../../store/slices/profileUsersSlice';
 import { dataHistories } from '../../../data/dataHistories';
 
-export default CardPublication = ({image, idUser, datePublication, description, reactions ,comments, navigation}) => {
+export default CardPublication = ({image, idUser, datePublication, description, reactions ,comments, navigation, idPublication}) => {
     const dispatch = useDispatch()
     const [user, setUser] = useState(null)
     const [history, setHistory] = useState(false)
@@ -37,8 +37,6 @@ export default CardPublication = ({image, idUser, datePublication, description, 
             idUser: idUser
         })
     }
-
-
 
     return (
         <View style={styles.cardPublication}>
@@ -97,7 +95,7 @@ export default CardPublication = ({image, idUser, datePublication, description, 
                 </TouchableHighlight>
             </View>
 
-            <ContentButtonsPublication navigation={navigation}/>
+            <ContentButtonsPublication navigation={navigation} idPublication={idPublication}/>
         </View>
     )
 }

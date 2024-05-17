@@ -22,12 +22,14 @@ export default ProfileUserScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <ProfileCover 
+      <ProfileCover
+        idUser={userProfileById?.id} 
         name={userProfileById?.name} 
         profilePicture={userProfileById?.profilePicture} 
         lastName={userProfileById?.lastName} 
         isFriend={userProfileById?.isFriend}
         isLoading={isLoading}
+        navigation={navigation}
       />
       
       {!isLoading &&

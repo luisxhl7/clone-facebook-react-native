@@ -1,8 +1,22 @@
-import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { dataHistories } from '../../../data/dataHistories';
 
-export default ProfileCover = ({profilePicture, name, lastName, isFriend, isLoading }) => {
+export default ProfileCover = ({profilePicture, name, lastName, isFriend, isLoading, idUser, navigation }) => {
+  const [history, setHistory] = useState(false)
+  
+  useEffect(() => {
+    const haveHistory = dataHistories.some((history) => history.idUser === idUser);
+    setHistory(haveHistory)
+  }, [idUser])
+
+  const handleRedirectHistoriesUser = () => {
+    navigation.push('history', {
+      idUser: idUser
+    })
+  } 
+
   return (
     <>
       <View>
@@ -13,11 +27,15 @@ export default ProfileCover = ({profilePicture, name, lastName, isFriend, isLoad
         />
       </View>
       <View style={styles.contentInfoUser}>
-        <Image
-          style={styles.imageUser}
-          source={isLoading ? null : profilePicture}
-          alt='Imagen de perfil del usuario'
-        />
+        <TouchableHighlight style={styles.contentImageUser} onPress={handleRedirectHistoriesUser}>
+          <View style={history && styles.contentImageUserCenter}>
+            <Image
+              style={styles.imageUser}
+              source={isLoading ? null : profilePicture}
+              alt='Imagen de perfil del usuario'
+            />
+          </View>
+        </TouchableHighlight>
         <Text style={styles.textName}>{!isLoading && `${name} ${lastName}`}</Text>
         {!isLoading &&
           <>
@@ -56,16 +74,28 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#8a8d92'
   },
-  imageUser:{
-    width: 155,
-    height: 155,
-    left: 20,
-    top: -110,
-    borderWidth: 3,
-    borderColor: '#ffffff',
+  contentImageUserCenter:{
     borderRadius: 100,
+    borderWidth: 3,
+    borderColor:"#0866ff"
+  },
+  contentImageUser:{
     position: 'absolute',
     zIndex: 99,
+    left: 20,
+    top: -110,
+    borderRadius: 100,
+    borderWidth: 3,
+    borderColor:"#ffffff"
+  },
+  historyActive:{
+  },
+  imageUser:{
+    width: 150,
+    height: 150,
+    borderWidth: 3,
+    borderRadius: 100,
+    borderColor: '#ffffff',
     backgroundColor: '#8a8d92'
   },
   contentInfoUser:{
