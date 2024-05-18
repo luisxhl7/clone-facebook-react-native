@@ -162,7 +162,7 @@ export default HistoryScreen = ({navigation, route}) => {
                 >
                     <TextInput 
                         underlayColor="transparent" 
-                        style={styles.button}
+                        style={styles.textInput}
                         placeholder='Envía un mensaje...'
                         placeholderTextColor='#ffffff'
                         onFocus={handleInputFocus}
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 75,
     },
-    button:{
+    textInput:{
         height: 40,
         width: 230,
         borderRadius: 25,
@@ -282,7 +282,6 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         marginHorizontal: 10,
         backgroundColor: '#2f3130'
-
     },
     textButton:{
         color: '#595b5f',

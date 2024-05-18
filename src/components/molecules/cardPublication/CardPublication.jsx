@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
 import {Foundation } from '@expo/vector-icons';
 import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
@@ -86,13 +86,16 @@ export default CardPublication = ({image, idUser, datePublication, description, 
                         </>
                     }
                 </TouchableHighlight>
-                <TouchableHighlight style={styles.buttonReaction}>
+                <TouchableOpacity 
+                    style={styles.buttonReaction} 
+                    onPress={() => navigation.push('commentspublication',{idPublication: idPublication})}
+                >
                     {comments.length > 0 ?
                         <Text style={styles.buttonReactionText}>{comments.length} comentarios</Text>
                         :
                         <></>
                     }
-                </TouchableHighlight>
+                </TouchableOpacity>
             </View>
 
             <ContentButtonsPublication navigation={navigation} idPublication={idPublication}/>

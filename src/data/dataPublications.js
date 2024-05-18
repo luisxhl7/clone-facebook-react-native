@@ -4,14 +4,25 @@ export const dataPublications = [
   {
     idUser: '2345678901',
     idPublication: '09090908',
-    description: 'Es increíble que podremos ver de nuevo harry potter.',
+    description: 'Es increíble que podremos ver de nuevo una nueva película de harry potter.',
     image: imagePublications.image_1,
     datePublication: 'enero',
     reactions: [],
     comments: [
       {
         idUser: '4567890123',
-        comment:'hola',
+        idComment: '123123123',
+        comment:'ya han pasado muchísimos años',
+      },
+      {
+        idUser: '4567890123',
+        idComment: '123123124',
+        comment:'tendré que sacar un dia entero para ponerme al dia asdasd asdasd asd',
+      },
+      {
+        idUser: '4567890123',
+        idComment: '123123125',
+        comment:'mi momento a llegado',
       },
     ],
   },
@@ -35,6 +46,7 @@ export const dataPublications = [
     comments: [
       {
         idUser: '4567890123',
+        idComment: '123123125',
         comment:'hola',
       },
     ],
@@ -59,6 +71,7 @@ export const dataPublications = [
     comments: [
       {
         idUser: '4567890123',
+        idComment: '123123125',
         comment:'hola',
       },
     ],
@@ -73,6 +86,7 @@ export const dataPublications = [
     comments: [
       {
         idUser: '4567890123',
+        idComment: '123123125',
         comment:'hola',
       },
     ],

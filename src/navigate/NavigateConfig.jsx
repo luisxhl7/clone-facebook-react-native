@@ -49,10 +49,7 @@ const NavigateConfig = () => {
                     <Stack.Screen name="commentspublication" component={CommentsPublicationScreen} 
                         options={{
                             animation: 'slide_from_bottom',
-                            headerTitle: '',
-                            headerRight: () => (
-                                <AntDesign name="search1" size={18} color="black" onPress={() => alert('Buscador')}/>
-                            ),
+                            headerTitle: 'Comentarios',
                             gestureDirection: 'vertical-inverted'
                         }}
                     />
