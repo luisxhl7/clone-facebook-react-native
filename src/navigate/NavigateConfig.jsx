@@ -8,6 +8,7 @@ import ProfileUserScreen from '../screens/ProfileUserScreen';
 import CommentsPublicationScreen from '../screens/CommentsPublicationScreen';
 import { LoginScreen } from '../screens/LoginScreen';
 import HistoryScreen from '../screens/HistoryScreen';
+import publicationScreen from '../screens/PublicationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ const NavigateConfig = () => {
                 <>
                     <Stack.Screen name="tabs" component={TabsTopNavigator} options={{ headerShown: false }}/>
                     <Stack.Screen name="history" component={HistoryScreen} options={{ headerShown: false }}/>
+                    <Stack.Screen name="publication" component={publicationScreen} options={{ headerShown: false }}/>
                     
                     <Stack.Screen name="friends" component={FriendsScreen} 
                         options={({ route }) => ({

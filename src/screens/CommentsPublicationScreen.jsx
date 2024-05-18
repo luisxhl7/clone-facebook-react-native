@@ -13,7 +13,7 @@ export default CommentsPublicationScreen = ({ navigation, route }) => {
     }, [idPublication])
 
     return (
-        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingTop: 10, backgroundColor: '#ffffff', paddingBottom: 50}}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingTop: 10, backgroundColor: '#ffffff', paddingBottom: 50, paddingHorizontal: 10}}>
             <View>
                 {comments?.comments.map( item => (
                     <CardComments key={item?.idComment} {...item} navigation={navigation}/>

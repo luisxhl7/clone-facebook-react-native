@@ -4,7 +4,7 @@ import { dataReels } from '../data/dataReels'
 import CardPublicationReel from '../components/molecules/cardPublicationReel/CardPublicationReel'
 import { useIsFocused } from '@react-navigation/native';
 
-export default ReelsScreen = () => {
+export default ReelsScreen = ({navigation}) => {
   const isFocused = useIsFocused();
   const [visibleIndex, setVisibleIndex] = useState(-1);
   const [refreshing, setRefreshing] = useState(false);
@@ -38,7 +38,7 @@ export default ReelsScreen = () => {
         />
       }
       renderItem={({item, index}) => (
-        <CardPublicationReel {...item} position={index} visibleIndex={visibleIndex}/>
+        <CardPublicationReel {...item} position={index} visibleIndex={visibleIndex} navigation={navigation}/>
       )}
       onViewableItemsChanged={onViewableItemsChanged}
       viewabilityConfig={{ itemVisiblePercentThreshold: 60 }}

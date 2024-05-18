@@ -4,7 +4,8 @@ import { dataPublications } from "../../data/dataPublications";
 const initialState = {
     isLoading: false, //true - false
     publications: dataPublications,
-    publicationByUser: null
+    publicationByUser: null,
+    publicationById: null
 };
 
 export const publicationsSlice = createSlice({
@@ -17,9 +18,12 @@ export const publicationsSlice = createSlice({
         filterPublicationsByUser: (state, action) => {
             state.publicationByUser = action.payload.publicationByUser;
         },
+        filterPublicationsById: (state, action) => {
+            state.publicationById = action.payload.publicationById;
+        },
     }
 });
   
-export const { isLoading, filterPublicationsByUser } = publicationsSlice.actions;
+export const { isLoading, filterPublicationsByUser, filterPublicationsById } = publicationsSlice.actions;
 
 export default publicationsSlice.reducer;

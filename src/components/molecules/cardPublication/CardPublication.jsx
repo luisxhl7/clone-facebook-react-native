@@ -30,7 +30,12 @@ export default CardPublication = ({image, idUser, datePublication, description, 
             idUser: idUser
         })
     }
-
+    const handleRedirectPublication = () => {
+        dispatch(isLoading({state: true}))
+        navigation.push('publication', {
+            idPublication: idPublication
+        })
+    }
     const handleRedirectHistoriesUser = () => {
         dispatch(isLoading({state: true}))
         navigation.push('history', {
@@ -68,37 +73,18 @@ export default CardPublication = ({image, idUser, datePublication, description, 
                 <Text style={styles.textDescription}>{description}</Text>
             </View>
             
-            <Image
-                style={styles.image}
-                fadeDuration={300}
-                source={image}
-            />
-            
-            <View style={styles.contentReactions}>
-                <TouchableHighlight style={styles.buttonReaction}>
-                    {reactions.length > 0 ?
-                        <>
-                            <Foundation name="like" size={22} color="#0866ff" style={styles.buttonReactionIcon}/>
-                            <Text style={styles.buttonReactionText}>{reactions.length}</Text>
-                        </>
-                        :
-                        <>
-                        </>
-                    }
-                </TouchableHighlight>
-                <TouchableOpacity 
-                    style={styles.buttonReaction} 
-                    onPress={() => navigation.push('commentspublication',{idPublication: idPublication})}
-                >
-                    {comments.length > 0 ?
-                        <Text style={styles.buttonReactionText}>{comments.length} comentarios</Text>
-                        :
-                        <></>
-                    }
-                </TouchableOpacity>
-            </View>
+            <TouchableHighlight
+                underlayColor="transparent"
+                onPress={handleRedirectPublication} 
+            >
+                <Image
+                    style={styles.image}
+                    fadeDuration={300}
+                    source={image}
+                />
+            </TouchableHighlight>
 
-            <ContentButtonsPublication navigation={navigation} idPublication={idPublication}/>
+            <ContentButtonsPublication navigation={navigation} idPublication={idPublication} reactions={reactions} comments={comments}/>
         </View>
     )
 }
@@ -144,24 +130,4 @@ const styles = StyleSheet.create({
         width: '100%',
         resizeMode: 'cover'
     },
-    contentReactions:{
-        marginHorizontal: 10,
-        marginVertical: 7,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    buttonReaction:{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    iconButton:{
-        marginRight: 5
-    },
-    buttonReactionText:{
-        color:'#65676B'
-    },
-    buttonReactionIcon:{
-        marginRight: 2,
-    }
 })

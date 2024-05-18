@@ -7,7 +7,7 @@ export const dataPublications = [
     description: 'Es increíble que podremos ver de nuevo una nueva película de harry potter.',
     image: imagePublications.image_1,
     datePublication: 'enero',
-    reactions: [],
+    reactions: [12322,123123,123123],
     comments: [
       {
         idUser: '4567890123',
@@ -17,7 +17,7 @@ export const dataPublications = [
       {
         idUser: '4567890123',
         idComment: '123123124',
-        comment:'tendré que sacar un dia entero para ponerme al dia asdasd asdasd asd',
+        comment:'tendré que sacar un dia entero para ponerme al dia',
       },
       {
         idUser: '4567890123',
@@ -47,7 +47,7 @@ export const dataPublications = [
       {
         idUser: '4567890123',
         idComment: '123123125',
-        comment:'hola',
+        comment:'que panorama tan hermosos!!',
       },
     ],
   },
@@ -72,7 +72,7 @@ export const dataPublications = [
       {
         idUser: '4567890123',
         idComment: '123123125',
-        comment:'hola',
+        comment:'Negan es lo mejor de lo mejor',
       },
     ],
   },
@@ -82,12 +82,12 @@ export const dataPublications = [
     description: '¿algo mejor que acampar con buena compañía?',
     image: imagePublications.image_5,
     datePublication: 'enero',
-    reactions: [12322,123123,123123,53453,1123,123123],
+    reactions: [],
     comments: [
       {
         idUser: '4567890123',
         idComment: '123123125',
-        comment:'hola',
+        comment:'Espero que la pasen muy bien',
       },
     ],
   },

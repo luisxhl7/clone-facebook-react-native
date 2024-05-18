@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
-import {Foundation, Feather } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { Video, ResizeMode } from 'expo-av';
 import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
 
-export default CardPublicationReel = ({image, idUser, date, description, reactions, comments, position, visibleIndex}) => {
+export default CardPublicationReel = ({image, idPublication, idUser, date, description, reactions, comments, position, visibleIndex, navigation}) => {
     const video = useRef(null);
     const [user, setUser] = useState(null);
     const [sound, setSound] = useState(true);
@@ -61,29 +61,8 @@ export default CardPublicationReel = ({image, idUser, date, description, reactio
                     <Feather name="volume-x" size={24} color="#ffffff" style={styles.buttonSound} onPress={handlePressSound}/>            
                 }
             </View>
-            
-            <View style={styles.contentReactions}>
-                <TouchableHighlight style={styles.buttonReaction}>
-                    {reactions.length > 0 ?
-                        <>
-                            <Foundation name="like" size={22} color="#0866ff" style={styles.buttonReactionIcon}/>
-                            <Text style={styles.buttonReactionText}>{reactions.length}</Text>
-                        </>
-                        :
-                        <>
-                        </>
-                    }
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.buttonReaction}>
-                    {comments.length > 0 ?
-                        <Text style={styles.buttonReactionText}>{comments.length} comentarios</Text>
-                        :
-                        <></>
-                    }
-                </TouchableHighlight>
-            </View>
-            
-            <ContentButtonsPublication/>
+
+            <ContentButtonsPublication navigation={navigation} idPublication={idPublication} reactions={reactions} comments={comments}/>
         </View>
     )
 }
