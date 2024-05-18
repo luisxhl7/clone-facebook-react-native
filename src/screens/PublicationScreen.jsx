@@ -1,36 +1,69 @@
-import React, { useEffect } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Image, StyleSheet, Text, TouchableHighlight, TouchableWithoutFeedback, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPublicationById_thunks } from '../store/thunks/publicationsThunks';
 import Constants from 'expo-constants'
 import ContentButtonsPublication from '../components/molecules/contentButtonsPublication/ContentButtonsPublication';
+import { getProfileUser_thunks } from '../store/thunks/profileUserThunks';
+import { isLoading } from '../store/slices/publicationsSlice';
 
 export default PublicationScreen = ({ navigation, route }) => {
-    const { publicationById } = useSelector(state => state.publications)
     const dispatch = useDispatch()
     const { idPublication } = route.params;
+    const { publicationById } = useSelector(state => state.publications)
+    const { userProfileById } = useSelector(state => state.profileUsers)
+    const [hiddenOptions, setHiddenOptions] = useState(true)
 
     useEffect(() => {
         dispatch(getPublicationById_thunks(idPublication))
     }, [idPublication])
 
+    useEffect(() => {
+        dispatch(getProfileUser_thunks(publicationById?.idUser))
+    }, [publicationById?.idUser])
+
+    const handleRedirectProfileUser = () => {
+        dispatch(isLoading({state: true}))
+        navigation.push('profileUser', {
+            idUser: publicationById?.idUser
+        })
+    }
+
     return (
-        <View style={styles.publicationScreen}>
-            <Image
-                style={styles.image}
-                fadeDuration={300}
-                source={publicationById?.image}
-            />
-            <View style={styles.contentInfo}>
-                <Text style={styles.textDescription}>{publicationById?.description}</Text>
-                <ContentButtonsPublication 
-                    navigation={navigation} 
-                    idPublication={idPublication} 
-                    reactions={publicationById?.reactions} 
-                    comments={publicationById?.comments}
+        <TouchableHighlight onPress={() => setHiddenOptions(!hiddenOptions)} style={styles.publicationScreen}>
+            <>
+                <Image
+                    style={styles.image}
+                    fadeDuration={300}
+                    source={publicationById?.image}
                 />
-            </View>
-        </View>
+                {hiddenOptions &&
+                    <TouchableWithoutFeedback>
+                        <View style={styles.contentInfo}>
+                            
+                            <TouchableHighlight onPress={handleRedirectProfileUser}>
+                                <Text style={styles.textNameUser}>
+                                    {userProfileById?.name} {userProfileById?.lastName}
+                                </Text>
+                            </TouchableHighlight>
+
+                            <Text style={styles.textDescription}>
+                                {publicationById?.description}
+                            </Text>
+
+                            <ContentButtonsPublication 
+                                navigation={navigation} 
+                                idPublication={idPublication} 
+                                reactions={publicationById?.reactions} 
+                                comments={publicationById?.comments}
+                            />
+                    
+                        </View>
+                    </TouchableWithoutFeedback>
+                }
+            </>
+
+        </TouchableHighlight>
     )
 }
 
@@ -44,14 +77,20 @@ const styles = StyleSheet.create({
     },
     contentInfo:{
         position: 'absolute',
-        width: '100%',
-        bottom: 10,
-        zIndex: 99
+        bottom: 0,
+        zIndex: 99,
+        paddingTop: 15,
+        paddingBottom: 5,
+        backgroundColor: 'rgba(0, 0, 0, 0.6)'
     },
     image:{
-        height: 350,
         width: '100%',
-        resizeMode: 'cover'
+        resizeMode: 'contain'
+    },
+    textNameUser:{
+        color: '#ffffff',
+        fontWeight: '800',
+        paddingHorizontal: 10,
     },
     textDescription:{
         color: '#ffffff',
