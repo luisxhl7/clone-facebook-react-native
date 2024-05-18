@@ -129,7 +129,7 @@ export default HistoryScreen = ({navigation, route}) => {
                         />
                         <View style={styles.contentName}>
                             <Text style={styles.text}>{userProfileById?.name}</Text>
-                            <AntDesign name="close" size={24} color="black" onPress={() => navigation.navigate('home')}/>
+                            <AntDesign name="close" size={24} color="#ffffff" onPress={() => navigation.navigate('home')}/>
                         </View>
                     </>
                 </TouchableHighlight>

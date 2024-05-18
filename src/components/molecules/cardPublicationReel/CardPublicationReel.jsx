@@ -1,17 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
 import { Feather } from '@expo/vector-icons';
 import { Video, ResizeMode } from 'expo-av';
 import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
+import { useDispatch } from 'react-redux';
+import { isLoading } from '../../../store/slices/profileUsersSlice';
+import { dataHistories } from '../../../data/dataHistories';
 
 export default CardPublicationReel = ({image, idPublication, idUser, date, description, reactions, comments, position, visibleIndex, navigation}) => {
     const video = useRef(null);
+    const dispatch = useDispatch();
     const [user, setUser] = useState(null);
     const [sound, setSound] = useState(true);
+    const [history, setHistory] = useState(false)
+
+    const imageUserStyle = [
+        styles.contentImageUser,
+        history && styles.historyActive
+    ]
 
     useEffect(() => {
         const result = usuariosFacebook.filter((user) => user.id === idUser)[0];
+        const haveHistory = dataHistories.some((history) => history.idUser === idUser);
+        setHistory(haveHistory)
         setUser(result);
     }, [idUser]);
 
@@ -27,16 +39,39 @@ export default CardPublicationReel = ({image, idPublication, idUser, date, descr
         setSound(!sound)
         video.current.setVolumeAsync(sound ? 0 : 1);
     }
+    const handleRedirectProfileUser = () => {
+        dispatch(isLoading({state: true}))
+        navigation.push('profileUser', {
+            idUser: idUser
+        })
+    }
+    const handleRedirectHistoriesUser = () => {
+        dispatch(isLoading({state: true}))
+        navigation.push('history', {
+            idUser: idUser
+        })
+    }
     
     return (
         <View style={styles.cardPublication}>
             <View style={styles.info}>
+            <TouchableHighlight 
+                underlayColor="transparent"
+                onPress={history ? handleRedirectHistoriesUser : handleRedirectProfileUser} 
+                style={imageUserStyle}
+            >
                 <Image
                     style={styles.imageUser}
                     source={user?.profilePicture}
                 />
+            </TouchableHighlight>
                 <View>
-                    <Text>{user?.name}</Text>
+                    <TouchableHighlight
+                        underlayColor="transparent"
+                        onPress={handleRedirectProfileUser} 
+                    >
+                        <Text>{user?.name}</Text>
+                    </TouchableHighlight>
                     <Text style={styles.textDate}>{date.toLocaleDateString()}</Text>
                 </View>
             </View>
@@ -76,7 +111,15 @@ const styles = StyleSheet.create({
         width: 35,
         height: 35,
         borderRadius: 50,
-        marginRight: 7
+    },
+    contentImageUser:{
+        borderRadius: 50,
+        marginRight: 7,
+        padding: 2
+    },
+    historyActive:{
+        borderColor: '#0866ff',
+        borderWidth: 3,
     },
     textDate:{
         fontSize: 11,

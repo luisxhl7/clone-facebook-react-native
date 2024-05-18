@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
 import { usuariosFacebook } from '../../../data/dataUsers'
-import {Foundation } from '@expo/vector-icons';
 import ContentButtonsPublication from '../contentButtonsPublication/ContentButtonsPublication';
 import { useDispatch } from 'react-redux';
 import { isLoading } from '../../../store/slices/profileUsersSlice';
@@ -45,9 +44,7 @@ export default CardPublication = ({image, idUser, datePublication, description, 
 
     return (
         <View style={styles.cardPublication}>
-            <View 
-                style={styles.info} 
-            >
+            <View style={styles.info}>
                 <TouchableHighlight 
                     underlayColor="transparent"
                     onPress={history ? handleRedirectHistoriesUser : handleRedirectProfileUser} 

@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, TextInput, View } from 'react-native'
 import { dataPublications } from '../data/dataPublications';
 import CardComments from '../components/molecules/cardComments/CardComments';
+import { dataReels } from '../data/dataReels';
 
 export default CommentsPublicationScreen = ({ navigation, route }) => {
     const { idPublication } = route.params;
     const [comments, setComments] = useState()
 
     useEffect(() => {
-        const resp = dataPublications.filter(item => item.idPublication === idPublication)[0]
+         resp = dataPublications.filter(item => item.idPublication === idPublication)[0]
+        if (!resp) {
+            resp = dataReels.filter(item => item.idPublication === idPublication)[0]
+        }
         setComments(resp);
     }, [idPublication])
 
